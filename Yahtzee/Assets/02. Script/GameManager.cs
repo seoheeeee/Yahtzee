@@ -1,9 +1,15 @@
 using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class GameManager : MonoBehaviourPun
 {
+
+    public Button startBnt;
+    public Button stopBnt;
 
     enum State
     {
@@ -12,12 +18,10 @@ public class GameManager : MonoBehaviourPun
 
     static GameManager instance;
 
-    [SerializeField] Node startNode;
-    [SerializeField] Dice[] dices;
-    public List<PlayerManager> playerManagerList;
+    [SerializeField]
+    List<Dice> diceList;
 
-    Queue<PlayerManager> playerQueue;
-    PlayerManager currentPlayer;
+  
 
     public static GameManager Instance
     {
@@ -45,11 +49,10 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
+    
+
     void Start()
     {
-
-     
-
 
     }
 
@@ -59,7 +62,25 @@ public class GameManager : MonoBehaviourPun
         
     }
 
+    public void DiceRoll()
+    {
+        startBnt.gameObject.SetActive(false);
+        stopBnt.gameObject.SetActive(true);
+        
 
+        foreach (var item in diceList)
+        {
+            item.isRoll = true;
+        }
+    }
 
+    public void DiceStop()
+    {
+        stopBnt.gameObject.SetActive(false);
 
+        foreach (var item in diceList)
+        {
+            item.isEnd = true;
+        }
+    }
 }

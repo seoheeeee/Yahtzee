@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class Dice : MonoBehaviour
 {
@@ -9,6 +11,9 @@ public class Dice : MonoBehaviour
     Transform dice;
     [SerializeField]
     DiceSide[] diceSides;
+
+    [SerializeField]
+    Button diceSelect;
 
     System.Random rand;
     Vector3[] randRotation = new Vector3[3];
@@ -20,9 +25,10 @@ public class Dice : MonoBehaviour
     public bool isRoll;
     public bool isEnd;
     public int value;
+    public bool isClick;
 
     [SerializeField]
-    Material dotActice;
+    Material dotActive;
     [SerializeField]
     Material dotMaterial;
 
@@ -36,7 +42,9 @@ public class Dice : MonoBehaviour
         randRotation[1] = new Vector3(0, 90, 0);
         randRotation[2] = new Vector3(0, 0, 90);
         startRotation = dice.rotation;
-        endRotation = Quaternion.Euler(randRotation[index] + dice.position);
+        endRotation = Quaternion.Euler(randRotation[index]);
+
+        diceSelect.enabled = false;
     }
 
 
@@ -58,14 +66,20 @@ public class Dice : MonoBehaviour
                 endRotation = startRotation * Quaternion.Euler(randRotation[index]);
                 speed = 0;
 
+              
+
+
                 if (isEnd)
                 {
                     isRoll = false;
                     isEnd = false;
+                    
 
                     StartCoroutine(EndDiceRoll(5));
                 }
+
             }
+            
         }
     }
 
@@ -98,10 +112,20 @@ public class Dice : MonoBehaviour
             if (item.isActive)
             {
                 value = item.sideValue;
-                item.meshRenderer.material = dotActice;
+                item.meshRenderer.material = dotActive;
             }
         }
+
+        diceSelect.enabled = true;
+
     }
+
+    public void KeepDice()
+    {
+        isClick = true;
+    }
+
+
 
 
     #region Old Dice
