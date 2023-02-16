@@ -2,26 +2,24 @@ using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-
 
 public class GameManager : MonoBehaviourPun
 {
+    [SerializeField]
+    Button startBnt;
+    [SerializeField]
+    Button stopBnt;
+   
 
-    public Button startBnt;
-    public Button stopBnt;
+   
 
-    enum State
-    {
-
-    }
+    public List<Dice> DiceList;
+    [SerializeField]
+    List<DiceSpritesManager> spriteManager;
 
     static GameManager instance;
 
-    [SerializeField]
-    List<Dice> diceList;
-
-  
+   
 
     public static GameManager Instance
     {
@@ -47,40 +45,50 @@ public class GameManager : MonoBehaviourPun
             if (Instance != this)
                 Destroy(gameObject);
         }
-    }
 
-    
+        
+    }
 
     void Start()
     {
 
     }
 
-
     private void Update()
     {
         
     }
 
-    public void DiceRoll()
+    public void StartRoll()
     {
         startBnt.gameObject.SetActive(false);
         stopBnt.gameObject.SetActive(true);
-        
 
-        foreach (var item in diceList)
+        foreach (var item in DiceList)
         {
             item.isRoll = true;
         }
     }
 
-    public void DiceStop()
+    public void StopRoll()
     {
         stopBnt.gameObject.SetActive(false);
 
-        foreach (var item in diceList)
+        foreach (var item in DiceList)
         {
             item.isEnd = true;
+        }
+    }
+
+    public void SelectDice(Dice dice)
+    {
+        foreach (var item in spriteManager)
+        {
+            if(item.diceImg.sprite == null)
+            {
+                item.SetSprite(dice);
+                break;
+            }
         }
     }
 }
