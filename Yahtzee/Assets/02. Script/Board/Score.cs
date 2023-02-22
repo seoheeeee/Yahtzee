@@ -3,6 +3,25 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum ScoreType 
+{
+    Aces,
+    Deuces,
+    Threes,
+    Fours,
+    Fives,
+    Sixes,
+    Subtotal,
+    Bonus,
+    Choice,
+    FourKind,
+    FullHouse,
+    S_Straight,
+    L_Straight,
+    Yacht,
+    Total
+}
+
 public class Score : MonoBehaviour
 {
     [SerializeField]
@@ -10,19 +29,25 @@ public class Score : MonoBehaviour
 
     int score;
 
+    public bool onClick;
+
+    public ScoreType scoreType;
+
     private void Start()
     {
         txtScore = transform.GetChild(0).GetComponent<TMP_Text>();
         txtScore.text = "0";
     }
 
-    public void SetScore(int score)
+    public void SetScore(int score, Color color)
     {
         txtScore.text = $"{score}";
-        this.score = score;
+        txtScore.color = Color.green;
     }
     public int GetScore()
     {
         return score;
     }
+
+    
 }
