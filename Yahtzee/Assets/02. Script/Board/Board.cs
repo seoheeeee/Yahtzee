@@ -10,7 +10,7 @@ public class Board : MonoBehaviour
     [SerializeField]
     Sprite[] playerTurn;
 
-    public Dictionary<int, List<Score>> playerScore;
+    public Dictionary<int, Dictionary<ScoreType, Score>> playerScore;
 
     [SerializeField]
     List<Score> player1;
@@ -19,13 +19,24 @@ public class Board : MonoBehaviour
 
     private void Start()
     {
-        playerScore = new Dictionary<int, List<Score>>();
+        playerScore = new Dictionary<int, Dictionary<ScoreType, Score>>();
 
-        playerScore.Add(1, player1);
-        playerScore.Add(2, player2);
+        Dictionary<ScoreType, Score> temp = new Dictionary<ScoreType, Score>();
+        foreach (Score item in player1)
+            temp.Add(item.scoreType, item);
 
-        Debug.Log(playerScore);
+        playerScore.Add(1, temp);
+
+        temp.Clear();
+
+        foreach (Score item in player2)
+            temp.Add(item.scoreType, item);
+
+        playerScore.Add(2, temp);
     }
 
-
+    //»ç¿ë¹ý
+    //playerScore[1][ScoreType.Aces]
 }
+
+
