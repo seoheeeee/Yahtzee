@@ -33,9 +33,12 @@ public class DiceSpritesManager : MonoBehaviour
 
     public void RemoveSprite()
     {
-        diceImg.enabled = false;
-        dice.gameObject.SetActive(true);
-        diceImg.sprite = null;
-
+        if (diceImg.enabled)
+        {
+            diceImg.enabled = false;
+            dice.gameObject.SetActive(true);
+            diceImg.sprite = null;
+            GameManager.Instance.keepDiceCount--;
+        }
     }
 }

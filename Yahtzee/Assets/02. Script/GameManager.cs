@@ -18,11 +18,13 @@ public class GameManager : MonoBehaviourPun
 
     public List<Dice> diceList;
     public int selectDiceCount;
+    public int keepDiceCount;
+
     Dictionary<int, int> diceDot;
 
 
 
-
+    bool isOnOff;
 
 
 
@@ -70,6 +72,11 @@ public class GameManager : MonoBehaviourPun
 
     private void Update()
     {
+        if( keepDiceCount == 5 && !isOnOff) 
+        {
+            isOnOff = true;
+            PreviewScore(1);
+        }
 
     }
 
@@ -103,6 +110,7 @@ public class GameManager : MonoBehaviourPun
             if (item.diceImg.sprite == null)
             {
                 item.SetSprite(dice);
+                keepDiceCount++;
                 break;
             }
         }
@@ -117,29 +125,29 @@ public class GameManager : MonoBehaviourPun
             diceDot[item.value] += 1;
         }
 
-        
+        Color green = new Color(0, 128f/255f, 0);
 
         foreach (var item in board.playerScore[playerNum])
         {
             switch (item.Key)
             {
                 case ScoreType.Aces:
-                    item.Value.SetScore(diceDot[1], Color.green);
+                    item.Value.SetScore(diceDot[1], green);
                     break;
                 case ScoreType.Deuces:
-                    item.Value.SetScore(diceDot[2] * 2, Color.green);
+                    item.Value.SetScore(diceDot[2] * 2, green);
                     break;
                 case ScoreType.Threes:
-                    item.Value.SetScore(diceDot[3] * 3, Color.green);
+                    item.Value.SetScore(diceDot[3] * 3, green);
                     break;
                 case ScoreType.Fours:
-                    item.Value.SetScore(diceDot[4] * 4, Color.green);
+                    item.Value.SetScore(diceDot[4] * 4, green);
                     break;
                 case ScoreType.Fives:
-                    item.Value.SetScore(diceDot[5] * 5, Color.green);
+                    item.Value.SetScore(diceDot[5] * 5, green);
                     break;
                 case ScoreType.Sixes:
-                    item.Value.SetScore(diceDot[6] * 6, Color.green);
+                    item.Value.SetScore(diceDot[6] * 6, green);
                     break;
                 case ScoreType.Subtotal:
                     break;
@@ -150,7 +158,7 @@ public class GameManager : MonoBehaviourPun
                     {
                         temp += dot.Key * dot.Value;
                     }
-                    item.Value.SetScore(temp, Color.green);
+                    item.Value.SetScore(temp, green);
                     break;
                 case ScoreType.FourKind:
                     foreach (var dot in diceDot)
@@ -161,11 +169,14 @@ public class GameManager : MonoBehaviourPun
                             isTrue = true;
                         }
                     }
-
                     if (isTrue)
-                        item.Value.SetScore(temp, Color.green);
+                        item.Value.SetScore(temp, green);
+                    else
+                        item.Value.SetScore(0, green);
+
                     break;
                 case ScoreType.FullHouse:
+                    bool fullHouse = false;
                     foreach (var dot in diceDot)
                     {
                         if (!isTrue)
@@ -176,7 +187,6 @@ public class GameManager : MonoBehaviourPun
                                 isTrue = true;
                             }
                         }
-
                         else
                         {
                             if(diceDot[temp] == 3)
@@ -185,7 +195,8 @@ public class GameManager : MonoBehaviourPun
                                 {
                                     int temp2 = (temp * diceDot[temp]) +
                                                 (dot.Value * dot.Key);
-                                    item.Value.SetScore(temp2, Color.green);
+                                    item.Value.SetScore(temp2, green);
+                                    fullHouse = true;
                                     break;
                                 }
                             }
@@ -195,15 +206,18 @@ public class GameManager : MonoBehaviourPun
                                 {
                                     int temp2 = (temp * diceDot[temp]) +
                                                 (dot.Value * dot.Key);
-                                    item.Value.SetScore(temp2, Color.green);
+                                    item.Value.SetScore(temp2, green);
+                                    fullHouse = true;
                                     break;
                                 }
                             }
                         }
                     }
+                    if(!fullHouse) 
+                        item.Value.SetScore(0, green);
                     break;
                 case ScoreType.S_Straight:
-                    for (int i = 0; i <= 6; i++)
+                    for (int i = 1; i <= 6; i++)
                     {
                         if (diceDot[i] != 0)
                             temp++;
@@ -212,10 +226,12 @@ public class GameManager : MonoBehaviourPun
                     }
 
                     if (temp == 4)
-                        item.Value.SetScore(15, Color.green);
+                        item.Value.SetScore(15, green);
+                    else  
+                        item.Value.SetScore(0, green);
                     break;
                 case ScoreType.L_Straight:
-                    for (int i = 0; i <= 6; i++)
+                    for (int i = 1; i <= 6; i++)
                     {
                         if (diceDot[i] != 0)
                             temp++;
@@ -224,17 +240,21 @@ public class GameManager : MonoBehaviourPun
                     }
 
                     if (temp == 5)
-                        item.Value.SetScore(30, Color.green);
+                        item.Value.SetScore(30, green);
+                    else
+                        item.Value.SetScore(0, green);
                     break;
                 case ScoreType.Yacht:
                     foreach (var dot in diceDot)
                     {
                         if(dot.Value == 5)
                         {
-                            item.Value.SetScore(50, Color.green);
+                            item.Value.SetScore(50, green);
                             break;
                         }
                     }
+                    if 
+                        (temp == 0) item.Value.SetScore(temp, green);
                     break;
                 case ScoreType.Total:
                     break;

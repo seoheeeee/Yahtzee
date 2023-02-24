@@ -42,7 +42,7 @@ public class Score : MonoBehaviour
     public void SetScore(int score, Color color)
     {
         txtScore.text = $"{score}";
-        txtScore.color = Color.green;
+        txtScore.color = color;
     }
     public int GetScore()
     {
