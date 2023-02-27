@@ -28,14 +28,11 @@ public class Board : MonoBehaviour
         playerScore.Add(1, temp);
 
         Dictionary<ScoreType, Score> temp2 = new Dictionary<ScoreType, Score>();
-
         foreach (Score item in player2)
             temp2.Add(item.scoreType, item);
 
         playerScore.Add(2, temp2);
     }
-
-
 
     //»ç¿ë¹ý
     //playerScore[1][ScoreType.Aces]
