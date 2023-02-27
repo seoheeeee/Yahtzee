@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum State
+{
+    Phase1,
+    Phase2,
+    Phase3,
+    End
+}
+
 public class GameManager : MonoBehaviourPun
 {
+    public State state;
     static GameManager instance;
 
     [SerializeField]
@@ -16,19 +25,14 @@ public class GameManager : MonoBehaviourPun
     [SerializeField]
     List<DiceSpritesManager> spriteManager;
 
-    int curPlayer;
+    PlayerManager curPlayer;
+    Queue<PlayerManager> players;
 
     public List<Dice> diceList;
     public int selectDiceCount;
     public int keepDiceCount;
 
     Dictionary<int, int> diceDot;
-
-
-
-    
-
-
 
     public static GameManager Instance
     {
@@ -60,6 +64,13 @@ public class GameManager : MonoBehaviourPun
 
     void Start()
     {
+        PlayerManager[] tempPlayer = FindObjectsOfType<PlayerManager>();
+
+        foreach (PlayerManager player in tempPlayer)
+        {
+            players.Enqueue(player);
+        }
+
         startBnt.gameObject.SetActive(true);
         stopBnt.gameObject.SetActive(false);
 
@@ -74,7 +85,27 @@ public class GameManager : MonoBehaviourPun
 
     private void Update()
     {
-        
+        if (curPlayer == null)
+            curPlayer = players.Dequeue();
+        else
+        {
+            switch (state)
+            {
+                case State.Phase1:
+
+                    break;
+                case State.Phase2:
+
+                    break;
+                case State.Phase3:
+
+                    break;
+                case State.End:
+                    players.Enqueue(curPlayer);
+                    curPlayer = null;
+                    break;
+            }
+        }
 
     }
 
@@ -269,29 +300,26 @@ public class GameManager : MonoBehaviourPun
     {
         int totalScore = 0;
 
-        foreach (var item in board.playerScore[curPlayer])
+        foreach (var item in board.playerScore[curPlayer.num])
         {
             item.Value.DeactiveBtn();
             totalScore += item.Value.score;
             switch (item.Key)
             {
                 case ScoreType.Subtotal:
-                    item.Value.SetScore(totalScore);
+                    item.Value.PVEndTurn(totalScore);
                     break;
                 case ScoreType.Bonus:
                     if (totalScore > 62)
                     {
-                        item.Value.SetScore(35);
+                        item.Value.PVEndTurn(35);
                         totalScore += 35;
                     }
                     break;
                 case ScoreType.Total:
-                    item.Value.SetScore(totalScore);
+                    item.Value.PVEndTurn(totalScore);
                     break;
             }
         }
     }
-
-
-
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public enum ScoreType 
 {
@@ -23,7 +24,9 @@ public enum ScoreType
     Total
 }
 
-public class Score : MonoBehaviour
+[RequireComponent(typeof(PhotonView))]
+
+public class Score : MonoBehaviourPun
 {
     [SerializeField]
     TMP_Text txtScore;
@@ -57,6 +60,17 @@ public class Score : MonoBehaviour
         txtScore.text = $"{score}";
     }
 
+    [PunRPC]
+    void RPCSetScore(int score)
+    {
+        txtScore.text = $"{score}";
+    }
+
+    public void PVEndTurn(int score)
+    {
+        photonView.RPC("RPCSetScore", RpcTarget.All, score);
+    }
+
     public void OnClick()
     {
         score = int.Parse(txtScore.text);
@@ -78,5 +92,6 @@ public class Score : MonoBehaviour
     {
         scoreBnt.enabled = false;
         txtScore.color = black;
+        PVEndTurn(int.Parse(txtScore.text));
     }
 }
