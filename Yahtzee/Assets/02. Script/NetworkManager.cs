@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using UnityEngine.UI;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -30,9 +29,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     [Header("ETC")]
     public PhotonView PV;
-
+    [SerializeField]
+    PlayerManager playerManager;
     List<RoomInfo> myList = new List<RoomInfo>();
     int currentPage = 1, maxPage, multiple;
+    
 
     //방리스트 갱신
     public void MyListClick(int num)
@@ -115,6 +116,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         RoomRenewal();
         ChatInput.text = "";
         for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
+
+        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
     }
 
 
@@ -125,7 +128,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-       
+
         RoomRenewal();
         ChatRPC("<color=yellow>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
     }
@@ -138,8 +141,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void RoomRenewal()
     {
-        RoomInfoText.text = PhotonNetwork.CurrentRoom.Name + 
-            " / " + PhotonNetwork.CurrentRoom.PlayerCount + 
+        RoomInfoText.text = PhotonNetwork.CurrentRoom.Name +
+            " / " + PhotonNetwork.CurrentRoom.PlayerCount +
             "명 / " + PhotonNetwork.CurrentRoom.MaxPlayers + "최대";
     }
 
@@ -169,17 +172,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         bool isInput = false;
         for (int i = 0; i < ChatText.Length; i++)
+        {
             if (ChatText[i].text == "")
             {
                 isInput = true;
                 ChatText[i].text = msg;
                 break;
             }
+        }
         if (!isInput) // 꽉차면 한칸씩 위로 올림
         {
             for (int i = 1; i < ChatText.Length; i++) ChatText[i - 1].text = ChatText[i].text;
             ChatText[ChatText.Length - 1].text = msg;
         }
+
     }
 
 
