@@ -154,7 +154,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //Ã¤ÆÃ
     public void Send()
     {
-        PV.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
+        PV.RPC("ChatRPC", RpcTarget.AllBuffered, PhotonNetwork.NickName + " : " + ChatInput.text);
         ChatInput.text = "";
     }
 
