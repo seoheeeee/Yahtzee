@@ -38,7 +38,6 @@ public class Score : MonoBehaviour
         txtScore = transform.GetChild(0).GetComponent<TMP_Text>();
         txtScore.text = "0";
     }
-
     public void SetScore(int score, Color color)
     {
         txtScore.text = $"{score}";

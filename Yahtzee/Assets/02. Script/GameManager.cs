@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,18 +16,14 @@ public class GameManager : MonoBehaviourPun
     Board board;
     [SerializeField]
     List<DiceSpritesManager> spriteManager;
+    [SerializeField]
+    List<PlayerManager> playerList;
 
     public List<Dice> diceList;
     public int selectDiceCount;
     public int keepDiceCount;
 
     Dictionary<int, int> diceDot;
-
-
-
-    bool isOnOff;
-
-
 
     public static GameManager Instance
     {
@@ -52,8 +49,6 @@ public class GameManager : MonoBehaviourPun
             if (Instance != this)
                 Destroy(gameObject);
         }
-
-
     }
 
     void Start()
@@ -61,23 +56,22 @@ public class GameManager : MonoBehaviourPun
         startBnt.gameObject.SetActive(true);
         stopBnt.gameObject.SetActive(false);
 
+        playerList = new List<PlayerManager>();
         diceDot = new Dictionary<int, int>();
+
+        playerList = FindObjectsOfType<PlayerManager>().ToList();
 
         for (int i = 1; i <= 6; i++)
         {
             diceDot.Add(i, 0);
         }
         //board.playerScore[1][ScoreType.Aces].onClick;
+
     }
 
     private void Update()
     {
-        if( keepDiceCount == 5 && !isOnOff) 
-        {
-            isOnOff = true;
-            PreviewScore(1);
-        }
-
+  
     }
 
     public void StartRoll()
@@ -173,7 +167,6 @@ public class GameManager : MonoBehaviourPun
                         item.Value.SetScore(temp, green);
                     else
                         item.Value.SetScore(0, green);
-
                     break;
                 case ScoreType.FullHouse:
                     bool fullHouse = false;
@@ -224,7 +217,6 @@ public class GameManager : MonoBehaviourPun
                         else
                             temp = 0;
                     }
-
                     if (temp == 4)
                         item.Value.SetScore(15, green);
                     else  
