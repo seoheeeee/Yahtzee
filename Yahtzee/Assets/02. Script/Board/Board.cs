@@ -27,12 +27,11 @@ public class Board : MonoBehaviour
 
         playerScore.Add(1, temp);
 
-        temp.Clear();
-
+        Dictionary<ScoreType, Score> temp2 = new Dictionary<ScoreType, Score>();
         foreach (Score item in player2)
-            temp.Add(item.scoreType, item);
+            temp2.Add(item.scoreType, item);
 
-        playerScore.Add(2, temp);
+        playerScore.Add(2, temp2);
     }
 
     //»ç¿ë¹ý
