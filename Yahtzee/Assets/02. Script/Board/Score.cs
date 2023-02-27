@@ -68,7 +68,7 @@ public class Score : MonoBehaviourPun
 
     public void PVEndTurn(int score)
     {
-        photonView.RPC("RPCSetScore", RpcTarget.All, score);
+        photonView.RPC("RPCSetScore", RpcTarget.AllBuffered, score);
     }
 
     public void OnClick()

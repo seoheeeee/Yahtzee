@@ -45,6 +45,8 @@ MonoBehaviour:
   - TeleportPlayerRPC
   - TeleportRPC
   - RPCSetScore
+  - ChangePlayer
+  - CurrentPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -25,8 +25,9 @@ public class GameManager : MonoBehaviourPun
     [SerializeField]
     List<DiceSpritesManager> spriteManager;
 
+    [SerializeField]
     PlayerManager curPlayer;
-    Queue<PlayerManager> players;
+    PlayerManager restPlayer;
 
     public List<Dice> diceList;
     public int selectDiceCount;
@@ -62,13 +63,16 @@ public class GameManager : MonoBehaviourPun
 
     }
 
-    void Start()
+       void Start()
     {
         PlayerManager[] tempPlayer = FindObjectsOfType<PlayerManager>();
 
-        foreach (PlayerManager player in tempPlayer)
+        foreach (PlayerManager item in tempPlayer)
         {
-            players.Enqueue(player);
+            if (item.num == 1)
+                curPlayer = item;
+            else
+                restPlayer = item;                    
         }
 
         startBnt.gameObject.SetActive(true);
@@ -85,28 +89,7 @@ public class GameManager : MonoBehaviourPun
 
     private void Update()
     {
-        if (curPlayer == null)
-            curPlayer = players.Dequeue();
-        else
-        {
-            switch (state)
-            {
-                case State.Phase1:
-
-                    break;
-                case State.Phase2:
-
-                    break;
-                case State.Phase3:
-
-                    break;
-                case State.End:
-                    players.Enqueue(curPlayer);
-                    curPlayer = null;
-                    break;
-            }
-        }
-
+        
     }
 
     public void StartRoll()
@@ -321,5 +304,20 @@ public class GameManager : MonoBehaviourPun
                     break;
             }
         }
+        photonView.RPC("ChangePlayer", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    void ChangePlayer()
+    {
+        PlayerManager temp = curPlayer;
+        curPlayer = restPlayer;
+        restPlayer = temp;
+    }
+
+    [PunRPC]
+    void CurrentPlayer()
+    {
+        
     }
 }
