@@ -29,11 +29,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     [Header("ETC")]
     public PhotonView PV;
-    [SerializeField]
-    PlayerManager playerManager;
     List<RoomInfo> myList = new List<RoomInfo>();
     int currentPage = 1, maxPage, multiple;
-    
+    [SerializeField]
+    GameObject SceneBtn;
+
+    private void Start()
+    {
+        SceneBtn.SetActive(false);
+    }
 
     //방리스트 갱신
     public void MyListClick(int num)
@@ -101,7 +105,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         ChatPanel.SetActive(false);
     }
 
-    public void CreateRoom() => PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 4 });
+    public void CreateRoom() => PhotonNetwork.CreateRoom(RoomInput.text == "" ? "Room" + Random.Range(0, 100) : RoomInput.text, new RoomOptions { MaxPlayers = 2 });
 
     public void JoinRandomRoom() => PhotonNetwork.JoinRandomRoom();
 
@@ -112,6 +116,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         ChatPanel.SetActive(true);
         LobbyPanel.SetActive(false);
         connectPanel.SetActive(false);
+        SceneBtn.SetActive(true);
 
         RoomRenewal();
         ChatInput.text = "";
@@ -158,6 +163,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            if(PhotonNetwork.PlayerList.Length == 2)
             SceneManager.LoadScene(1);
         }
     }
