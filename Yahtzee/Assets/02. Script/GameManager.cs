@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviourPun
     List<DiceSpritesManager> spriteManager;
 
     PlayerManager curPlayer;
-    Queue<PlayerManager> players;
+    PlayerManager restPlayer;
 
     public List<Dice> diceList;
     public int selectDiceCount;
@@ -62,13 +62,25 @@ public class GameManager : MonoBehaviourPun
 
     }
 
+    [PunRPC]
+    void ChangePlayer()
+    {
+        PlayerManager temp = curPlayer;
+        curPlayer = restPlayer;
+        restPlayer = temp;
+    }
+
+
     void Start()
     {
         PlayerManager[] tempPlayer = FindObjectsOfType<PlayerManager>();
 
-        foreach (PlayerManager player in tempPlayer)
+        foreach (PlayerManager item in tempPlayer)
         {
-            players.Enqueue(player);
+            if (item.num == 1)
+                curPlayer = item;
+            else
+                restPlayer = item;
         }
 
         startBnt.gameObject.SetActive(true);
@@ -85,27 +97,27 @@ public class GameManager : MonoBehaviourPun
 
     private void Update()
     {
-        if (curPlayer == null)
-            curPlayer = players.Dequeue();
-        else
-        {
-            switch (state)
-            {
-                case State.Phase1:
+        //if (curPlayer == null)
+        //    curPlayer = players.Dequeue();
+        //else
+        //{
+        //    switch (state)
+        //    {
+        //        case State.Phase1:
 
-                    break;
-                case State.Phase2:
+        //            break;
+        //        case State.Phase2:
 
-                    break;
-                case State.Phase3:
+        //            break;
+        //        case State.Phase3:
 
-                    break;
-                case State.End:
-                    players.Enqueue(curPlayer);
-                    curPlayer = null;
-                    break;
-            }
-        }
+        //            break;
+        //        case State.End:
+        //            players.Enqueue(curPlayer);
+        //            curPlayer = null;
+        //            break;
+        //    }
+        //}
 
     }
 
