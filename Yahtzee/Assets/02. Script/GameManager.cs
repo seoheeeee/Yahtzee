@@ -81,8 +81,6 @@ public class GameManager : MonoBehaviourPun
         {
             PlayerTurn(item);
         }
-
-        startBnt.gameObject.SetActive(true);
         stopBnt.gameObject.SetActive(false);
 
         diceDot = new Dictionary<int, int>();
