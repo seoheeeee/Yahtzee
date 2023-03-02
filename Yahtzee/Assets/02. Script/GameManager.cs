@@ -332,6 +332,9 @@ public class GameManager : MonoBehaviourPun
         PlayerManager temp = curPlayer;
         curPlayer = restPlayer;
         restPlayer = temp;
+
+        curPlayer.isTurn = true;
+        restPlayer.isTurn = false;
     }
 
     public void Turn(bool isTurn , int num = 0)
