@@ -47,6 +47,8 @@ MonoBehaviour:
   - RPCSetScore
   - ChangePlayer
   - CurrentPlayer
+  - RPCRemoveSprite
+  - RPCSyncSprite
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

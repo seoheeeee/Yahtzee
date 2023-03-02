@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using Photon.Pun;
 
-public class Dice : MonoBehaviour
+public class Dice : MonoBehaviourPun
 {
     [SerializeField]
     Transform dice;
@@ -108,9 +109,19 @@ public class Dice : MonoBehaviour
         if (value == 0)
             return;
         GameManager.Instance.SelectDice(this);
-        gameObject.SetActive(false);
 
-        Debug.Log(123);
+        ActiveDice(false);
+    }
+
+    [PunRPC]
+    void RPCAtiveDice(bool activate)
+    {
+        gameObject.SetActive(activate);
+    }
+
+    public void ActiveDice(bool activate)
+    {
+        photonView.RPC("RPCAtiveDice", RpcTarget.AllBuffered, activate);
     }
 
     #region Old Dice
