@@ -163,7 +163,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            if(PhotonNetwork.PlayerList.Length == 2)
+            //if(PhotonNetwork.PlayerList.Length == 2)
             SceneManager.LoadScene(1);
         }
     }

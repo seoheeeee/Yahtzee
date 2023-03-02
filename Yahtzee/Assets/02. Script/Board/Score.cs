@@ -91,6 +91,7 @@ public class Score : MonoBehaviourPun
 
     public void DeactiveBtn()
     {
+        if (scoreBnt == null) return;
         scoreBnt.enabled = false;
         txtScore.color = black;
         PVEndTurn(int.Parse(txtScore.text));
