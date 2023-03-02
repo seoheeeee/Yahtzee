@@ -15,13 +15,6 @@ public class DiceSpritesManager : MonoBehaviour
     {
         diceImg.enabled = false;
     }
-
-    
-    void Update()
-    {
-        
-    }
-
     public void SetSprite(Dice dice)
     {
         if (dice.value <= 0)

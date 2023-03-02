@@ -7,15 +7,22 @@ using UnityEngine.UI;
 
 public enum State
 {
-    Phase1,
-    Phase2,
-    Phase3,
-    End
+    PlayGame,
+    EndGame
+}
+
+public enum Phase
+{
+    phase1,
+    phase2,
+    phase3
 }
 
 public class GameManager : MonoBehaviourPun
 {
     public State state;
+    public Phase phase;
+
     static GameManager instance;
 
     [SerializeField]
@@ -35,6 +42,7 @@ public class GameManager : MonoBehaviourPun
     public List<Dice> diceList;
     public int selectDiceCount;
     public int keepDiceCount;
+    public int chance;
 
     Dictionary<int, int> diceDot;
 
@@ -89,25 +97,39 @@ public class GameManager : MonoBehaviourPun
         {
             diceDot.Add(i, 0);
         }
+
+        Turn(false);
     }
 
     private void Update()
     {
-
+        if(keepDiceCount > 4 && phase == Phase.phase1)
+        {
+            state = State.EndGame;
+            phase = Phase.phase1;
+        }
        
         switch (state)
         {
-            case State.Phase1:
-
+            case State.PlayGame:
+                if (chance >= 3)
+                    state = State.EndGame;
                 break;
-            case State.Phase2:
+            case State.EndGame:
+                switch (phase)
+                {
+                    case Phase.phase1:
+                        PreviewScore(curPlayer.num);
+                        phase = Phase.phase2;
 
-                break;
-            case State.Phase3:
+                        break;
+                    case Phase.phase2:
 
-                break;
-            case State.End:
-                
+                        break;
+                    case Phase.phase3:
+
+                        break;
+                }
                 break;
         }
     }
@@ -122,6 +144,8 @@ public class GameManager : MonoBehaviourPun
             if (item.gameObject.activeSelf)
                 item.isRoll = true;
         }
+
+        chance++;
     }
 
     public void StopRoll()
@@ -341,15 +365,19 @@ public class GameManager : MonoBehaviourPun
     {
         if (isTurn)
         {
-            startBnt.gameObject.SetActive(true);
+            if(state == State.PlayGame)
+                startBnt.gameObject.SetActive(true);
+            else
+                startBnt.gameObject.SetActive(false);
+
             board.ActiveButtons(num, true);
         }
         else
         {
-            startBnt.gameObject.SetActive(false);
-
+            //startBnt.gameObject.SetActive(false);
             board.ActiveButtons(1, false);
             board.ActiveButtons(2, false);
+
         }
     }
 }
