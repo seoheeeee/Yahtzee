@@ -9,6 +9,11 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
     {
         DontDestroyOnLoad(gameObject);
     }
+
+    private void Update()
+    {
+
+    }
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         if (photonView.IsMine)

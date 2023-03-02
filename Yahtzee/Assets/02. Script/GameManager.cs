@@ -74,11 +74,10 @@ public class GameManager : MonoBehaviourPun
             if (item.num == 1)
                 curPlayer = item;
             else
-                restPlayer = item;                    
-        }
+                restPlayer = item;
 
-        board.ActiveButtons(1, true);
-        board.ActiveButtons(2, false);
+            PlayerTurn(item);
+        }
 
         startBnt.gameObject.SetActive(true);
         stopBnt.gameObject.SetActive(false);
@@ -93,6 +92,7 @@ public class GameManager : MonoBehaviourPun
 
     private void Update()
     {
+
         switch (state)
         {
             case State.Phase1:
@@ -330,9 +330,19 @@ public class GameManager : MonoBehaviourPun
         curPlayer = restPlayer;
         restPlayer = temp;
 
-        board.ActiveButtons(curPlayer.num, true);
-        board.ActiveButtons(restPlayer.num, false);   
+        PlayerTurn(curPlayer);
     }
 
-
+    public void PlayerTurn(PlayerManager pm)
+    {
+        if(pm.num != curPlayer.num)
+        {
+            board.ActiveButtons(1, false);
+            board.ActiveButtons(2, false);
+        }
+        else
+        {
+            board.ActiveButtons(pm.num, true);
+        }
+    }
 }
