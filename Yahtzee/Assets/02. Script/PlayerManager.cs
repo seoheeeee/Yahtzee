@@ -4,6 +4,7 @@ using Photon.Pun;
 public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback
 {
     public int num;
+    public bool isTurn;
 
     private void Awake()
     {
@@ -13,6 +14,20 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
     private void Update()
     {
 
+        if (GameManager.Instance != null)
+        {
+            if (photonView.IsMine)
+            {
+                if (isTurn)
+                {
+                    GameManager.Instance.Turn(num,isTurn);
+                }
+                else
+                {
+                    GameManager.Instance.Turn(num, isTurn);
+                }
+            }
+        }
     }
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {

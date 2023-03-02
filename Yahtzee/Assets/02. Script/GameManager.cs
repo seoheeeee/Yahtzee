@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
@@ -72,15 +73,14 @@ public class GameManager : MonoBehaviourPun
         foreach (PlayerManager item in tempPlayer)
         {
             if (item.num == 1)
+            {
                 curPlayer = item;
+                curPlayer.isTurn = true;
+            }
             else
                 restPlayer = item;
         }
 
-        foreach (PlayerManager item in tempPlayer)
-        {
-            PlayerTurn(item);
-        }
         stopBnt.gameObject.SetActive(false);
 
         diceDot = new Dictionary<int, int>();
@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviourPun
     private void Update()
     {
 
+       
         switch (state)
         {
             case State.Phase1:
@@ -323,7 +324,6 @@ public class GameManager : MonoBehaviourPun
         }
         photonView.RPC("ChangePlayer", RpcTarget.AllBuffered);
 
-        PlayerTurn(curPlayer);
     }
 
     [PunRPC]
@@ -334,19 +334,16 @@ public class GameManager : MonoBehaviourPun
         restPlayer = temp;
     }
 
-    public void PlayerTurn(PlayerManager pm)
+    public void Turn(int num,bool isTurn)
     {
-        if(pm.num != curPlayer.num)
+        if (isTurn)
         {
-            board.ActiveButtons(1, false);
-            board.ActiveButtons(2, false);
-            startBnt.gameObject.SetActive(false);
-
+            board.ActiveButtons(num, true);
         }
         else
         {
-            board.ActiveButtons(pm.num, true);
-            startBnt.gameObject.SetActive(true);
+            board.ActiveButtons(1, false);
+            board.ActiveButtons(2, false);
         }
     }
 }
