@@ -20,11 +20,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
             {
                 if (isTurn)
                 {
+                    GameManager.Instance.Turn(1, false);
+                    GameManager.Instance.Turn(2, false);
                     GameManager.Instance.Turn(num,isTurn);
                 }
                 else
                 {
-                    GameManager.Instance.Turn(num, isTurn);
+                    GameManager.Instance.Turn(1, false);
+                    GameManager.Instance.Turn(2, false);
                 }
             }
         }
