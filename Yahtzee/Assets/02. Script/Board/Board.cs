@@ -17,7 +17,7 @@ public class Board : MonoBehaviour
     [SerializeField]
     List<Score> player2;
 
-    private void Start()
+    private void Awake()
     {
         playerScore = new Dictionary<int, Dictionary<ScoreType, Score>>();
 
