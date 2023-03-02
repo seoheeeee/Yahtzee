@@ -181,7 +181,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 14
 --- !u!114 &11086100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,7 +849,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 12
 --- !u!114 &182359025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1147,7 +1147,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 9
 --- !u!114 &203570308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1392,7 +1392,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 11
 --- !u!114 &218326905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1555,7 +1555,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 10
 --- !u!114 &237648187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2103,7 +2103,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 4
 --- !u!114 &329932764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2767,7 +2767,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 6
 --- !u!114 &456992367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3012,7 +3012,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 7
 --- !u!114 &475028616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3175,7 +3175,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 8
 --- !u!114 &477704262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3432,7 +3432,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 7
 --- !u!114 &522707943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3865,7 +3865,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 13
 --- !u!114 &541583514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4028,7 +4028,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 8
 --- !u!114 &566499940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4767,7 +4767,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 13
 --- !u!114 &742575259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4848,7 +4848,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 3
 --- !u!114 &779510933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5093,7 +5093,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 5
 --- !u!114 &798839548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6308,7 +6308,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 2
 --- !u!114 &1054875190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7265,7 +7265,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 4
 --- !u!114 &1225308196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8273,7 +8273,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 14
 --- !u!114 &1452320552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8436,7 +8436,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 9
 --- !u!114 &1456392368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8652,7 +8652,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 1
 --- !u!114 &1494569560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8897,7 +8897,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 3
 --- !u!114 &1522445729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9394,7 +9394,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 1
 --- !u!114 &1576830366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9927,7 +9927,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 2
 --- !u!114 &1742093417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10422,7 +10422,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 10
 --- !u!114 &1899557261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10667,7 +10667,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 6
 --- !u!114 &1900389056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11255,7 +11255,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 12
 --- !u!114 &2006986035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11471,7 +11471,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 5
 --- !u!114 &2023629135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11697,7 +11697,7 @@ MonoBehaviour:
   scoreBnt: {fileID: 0}
   score: 0
   onClick: 0
-  scoreType: 0
+  scoreType: 11
 --- !u!114 &2052929882
 MonoBehaviour:
   m_ObjectHideFlags: 0

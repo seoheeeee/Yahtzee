@@ -51,6 +51,7 @@ public class Score : MonoBehaviourPun
 
         green = new Color(0, 128f / 255f, 0);
         black = Color.black;
+
     }
 
     
