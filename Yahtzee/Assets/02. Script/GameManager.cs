@@ -58,8 +58,6 @@ public class GameManager : MonoBehaviourPun
             if (Instance != this)
                 Destroy(gameObject);
         }
-
-
     }
 
     [PunRPC]
