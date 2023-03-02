@@ -108,7 +108,7 @@ public class Dice : MonoBehaviourPun
     {
         if (value == 0)
             return;
-        GameManager.Instance.SelectDice(this);
+        
 
         ActiveDice(false);
     }
@@ -116,11 +116,13 @@ public class Dice : MonoBehaviourPun
     [PunRPC]
     void RPCAtiveDice(bool activate)
     {
+        GameManager.Instance.SelectDice(this);
         gameObject.SetActive(activate);
     }
 
     public void ActiveDice(bool activate)
     {
+
         photonView.RPC("RPCAtiveDice", RpcTarget.AllBuffered, activate);
     }
 

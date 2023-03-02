@@ -49,6 +49,7 @@ MonoBehaviour:
   - CurrentPlayer
   - RPCRemoveSprite
   - RPCSyncSprite
+  - RPCAtiveDice
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
