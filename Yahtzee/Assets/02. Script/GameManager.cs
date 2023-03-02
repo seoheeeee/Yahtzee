@@ -322,6 +322,8 @@ public class GameManager : MonoBehaviourPun
             }
         }
         photonView.RPC("ChangePlayer", RpcTarget.AllBuffered);
+
+        PlayerTurn(curPlayer);
     }
 
     [PunRPC]
@@ -330,8 +332,6 @@ public class GameManager : MonoBehaviourPun
         PlayerManager temp = curPlayer;
         curPlayer = restPlayer;
         restPlayer = temp;
-
-        PlayerTurn(curPlayer);
     }
 
     public void PlayerTurn(PlayerManager pm)
