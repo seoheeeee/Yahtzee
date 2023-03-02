@@ -72,15 +72,14 @@ public class GameManager : MonoBehaviourPun
         foreach (PlayerManager item in tempPlayer)
         {
             if (item.num == 1)
-            {
                 curPlayer = item;
-                PlayerTurn(item);
-            }
             else
-            {
                 restPlayer = item;
-                PlayerTurn(item);
-            }
+        }
+
+        foreach (PlayerManager item in tempPlayer)
+        {
+            PlayerTurn(item);
         }
 
         startBnt.gameObject.SetActive(true);
