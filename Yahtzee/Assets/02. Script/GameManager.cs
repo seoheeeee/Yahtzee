@@ -72,11 +72,15 @@ public class GameManager : MonoBehaviourPun
         foreach (PlayerManager item in tempPlayer)
         {
             if (item.num == 1)
+            {
                 curPlayer = item;
+                PlayerTurn(item);
+            }
             else
+            {
                 restPlayer = item;
-
-            PlayerTurn(item);
+                PlayerTurn(item);
+            }
         }
 
         startBnt.gameObject.SetActive(true);
@@ -339,10 +343,13 @@ public class GameManager : MonoBehaviourPun
         {
             board.ActiveButtons(1, false);
             board.ActiveButtons(2, false);
+            startBnt.gameObject.SetActive(false);
+
         }
         else
         {
             board.ActiveButtons(pm.num, true);
+            startBnt.gameObject.SetActive(true);
         }
     }
 }
