@@ -40,7 +40,7 @@ public class Score : MonoBehaviourPun
 
     public ScoreType scoreType;
 
-    private void Start()
+    private void Awake()
     {
         txtScore = transform.GetChild(0).GetComponent<TMP_Text>();
         txtScore.text = "0";
@@ -91,7 +91,6 @@ public class Score : MonoBehaviourPun
 
     public void DeactiveBtn()
     {
-        if (scoreBnt == null) return;
         scoreBnt.enabled = false;
         txtScore.color = black;
         PVEndTurn(int.Parse(txtScore.text));
