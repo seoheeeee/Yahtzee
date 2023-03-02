@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviourPun
 
     [SerializeField]
     PlayerManager curPlayer;
+    [SerializeField]
     PlayerManager restPlayer;
 
     public List<Dice> diceList;
@@ -330,7 +331,7 @@ public class GameManager : MonoBehaviourPun
         restPlayer = temp;
 
         board.ActiveButtons(curPlayer.num, true);
-        board.ActiveButtons(restPlayer.num, false);
+        board.ActiveButtons(restPlayer.num, false);   
     }
 
 
