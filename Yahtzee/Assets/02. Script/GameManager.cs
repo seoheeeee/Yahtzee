@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviourPun
             else
                 restPlayer = item;
         }
-
+        startBnt.gameObject.SetActive(false);
         stopBnt.gameObject.SetActive(false);
 
         diceDot = new Dictionary<int, int>();
@@ -334,14 +334,17 @@ public class GameManager : MonoBehaviourPun
         restPlayer = temp;
     }
 
-    public void Turn(int num,bool isTurn)
+    public void Turn(bool isTurn , int num = 0)
     {
         if (isTurn)
         {
+            startBnt.gameObject.SetActive(true);
             board.ActiveButtons(num, true);
         }
         else
         {
+            startBnt.gameObject.SetActive(false);
+
             board.ActiveButtons(1, false);
             board.ActiveButtons(2, false);
         }
