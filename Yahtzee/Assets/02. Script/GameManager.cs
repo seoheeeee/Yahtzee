@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -63,7 +64,7 @@ public class GameManager : MonoBehaviourPun
 
     }
 
-       void Start()
+    void Start()
     {
         PlayerManager[] tempPlayer = FindObjectsOfType<PlayerManager>();
 
@@ -75,6 +76,9 @@ public class GameManager : MonoBehaviourPun
                 restPlayer = item;                    
         }
 
+        board.ActiveButtons(1, true);
+        board.ActiveButtons(2, false);
+
         startBnt.gameObject.SetActive(true);
         stopBnt.gameObject.SetActive(false);
 
@@ -84,12 +88,25 @@ public class GameManager : MonoBehaviourPun
         {
             diceDot.Add(i, 0);
         }
-        //board.playerScore[1][ScoreType.Aces].onClick;
     }
 
     private void Update()
     {
-        
+        switch (state)
+        {
+            case State.Phase1:
+
+                break;
+            case State.Phase2:
+
+                break;
+            case State.Phase3:
+
+                break;
+            case State.End:
+                
+                break;
+        }
     }
 
     public void StartRoll()
@@ -137,8 +154,6 @@ public class GameManager : MonoBehaviourPun
         {
             diceDot[item.value] += 1;
         }
-
-        
 
         foreach (var item in board.playerScore[playerNum])
         {
@@ -313,11 +328,10 @@ public class GameManager : MonoBehaviourPun
         PlayerManager temp = curPlayer;
         curPlayer = restPlayer;
         restPlayer = temp;
+
+        board.ActiveButtons(curPlayer.num, true);
+        board.ActiveButtons(restPlayer.num, false);
     }
 
-    [PunRPC]
-    void CurrentPlayer()
-    {
-        
-    }
+
 }

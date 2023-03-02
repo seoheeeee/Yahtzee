@@ -34,8 +34,19 @@ public class Board : MonoBehaviour
         playerScore.Add(2, temp2);
     }
 
-    //»ç¿ë¹ý
-    //playerScore[1][ScoreType.Aces]
+    public void ActiveButtons(int num ,bool isActive)
+    {
+        if (isActive)
+        {
+            foreach (var item in playerScore[num])
+                item.Value.ActiveBtn();
+        }
+        else
+        {
+            foreach (var item in playerScore[num])
+                item.Value.DeactiveBtn();
+        }
+    }
 }
 
 
