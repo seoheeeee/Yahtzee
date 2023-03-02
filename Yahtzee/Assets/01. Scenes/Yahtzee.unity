@@ -7424,37 +7424,37 @@ MonoBehaviour:
   board: {fileID: 0}
   playerTurn: []
   player1:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 444600596}
+  - {fileID: 1576830365}
+  - {fileID: 1742093416}
+  - {fileID: 1522445728}
+  - {fileID: 329932763}
+  - {fileID: 798839547}
+  - {fileID: 1900389055}
+  - {fileID: 475028615}
+  - {fileID: 477704261}
+  - {fileID: 1456392367}
+  - {fileID: 237648186}
+  - {fileID: 218326904}
+  - {fileID: 2006986034}
+  - {fileID: 742575258}
+  - {fileID: 1452320551}
   player2:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2114567539}
+  - {fileID: 1494569559}
+  - {fileID: 1054875189}
+  - {fileID: 779510932}
+  - {fileID: 1225308195}
+  - {fileID: 2023629134}
+  - {fileID: 456992366}
+  - {fileID: 522707942}
+  - {fileID: 566499939}
+  - {fileID: 203570307}
+  - {fileID: 1899557260}
+  - {fileID: 2052929881}
+  - {fileID: 182359024}
+  - {fileID: 541583513}
+  - {fileID: 11086099}
 --- !u!114 &1284272909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11615,6 +11615,7 @@ MonoBehaviour:
   - {fileID: 451186245}
   - {fileID: 1960412296}
   - {fileID: 118132082}
+  curPlayer: {fileID: 0}
   diceList:
   - {fileID: 916565139}
   - {fileID: 1650467578}
