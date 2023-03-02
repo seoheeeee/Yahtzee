@@ -172,6 +172,20 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
+    List<int> diceIndex= new List<int>();
+
+    [PunRPC]
+    void AddDice(int index)
+    {
+        diceIndex.Add(index);
+    }
+
+    [PunRPC]
+    void RemoveDice(int index)
+    {
+        diceIndex.RemoveAt(index);
+    }
+
     void PreviewScore(int playerNum)
     {
         int temp = 0;
