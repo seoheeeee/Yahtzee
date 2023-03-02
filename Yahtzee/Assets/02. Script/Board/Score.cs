@@ -47,14 +47,19 @@ public class Score : MonoBehaviourPun
 
         scoreBnt = transform.GetComponent<Button>();
         scoreBnt.enabled = true;
-        scoreBnt.onClick.AddListener(GameManager.Instance.EndTurn);
+       
 
         green = new Color(0, 128f / 255f, 0);
         black = Color.black;
 
     }
 
-    
+    private void Start()
+    {
+        scoreBnt.onClick.AddListener(GameManager.Instance.EndTurn);
+    }
+
+
 
     public void SetScore(int score)
     {
