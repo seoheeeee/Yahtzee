@@ -19,19 +19,19 @@ public class Board : MonoBehaviour
 
     private void Start()
     {
-        //playerScore = new Dictionary<int, Dictionary<ScoreType, Score>>();
+        playerScore = new Dictionary<int, Dictionary<ScoreType, Score>>();
 
-        //Dictionary<ScoreType, Score> temp = new Dictionary<ScoreType, Score>();
-        //foreach (Score item in player1)
-        //    temp.Add(item.scoreType, item);
+        Dictionary<ScoreType, Score> temp = new Dictionary<ScoreType, Score>();
+        foreach (Score item in player1)
+            temp.Add(item.scoreType, item);
 
-        //playerScore.Add(1, temp);
+        playerScore.Add(1, temp);
 
-        //Dictionary<ScoreType, Score> temp2 = new Dictionary<ScoreType, Score>();
-        //foreach (Score item in player2)
-        //    temp2.Add(item.scoreType, item);
+        Dictionary<ScoreType, Score> temp2 = new Dictionary<ScoreType, Score>();
+        foreach (Score item in player2)
+            temp2.Add(item.scoreType, item);
 
-        //playerScore.Add(2, temp2);
+        playerScore.Add(2, temp2);
     }
 
     //»ç¿ë¹ý
