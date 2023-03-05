@@ -171,158 +171,159 @@ public class GameManager : MonoBehaviourPun
             }
         }
     }
-
+    bool isPewivew;
     public void PreviewScore(int playerNum)
     {
-        if (phase != Phase.phase1) return;
-        if (state != State.EndGame) return;
-        int temp = 0;
-        bool isTrue = false;
-        
-        foreach (Dice item in diceList)
+        if (!isPewivew)
         {
-            diceDot[item.value] += 1;
-        }
+            int temp = 0;
+            bool isTrue = false;
 
-        foreach (var item in board.playerScore[playerNum])
-        {
-            item.Value.ActiveBtn();
-
-            switch (item.Key)
+            foreach (Dice item in diceList)
             {
-                case ScoreType.Aces:
-                    item.Value.SetScore(diceDot[1]);
-                    break;
-                case ScoreType.Deuces:
-                    item.Value.SetScore(diceDot[2] * 2);
-                    break;
-                case ScoreType.Threes:
-                    item.Value.SetScore(diceDot[3] * 3);
-                    break;
-                case ScoreType.Fours:
-                    item.Value.SetScore(diceDot[4] * 4);
-                    break;
-                case ScoreType.Fives:
-                    item.Value.SetScore(diceDot[5] * 5);
-                    break;
-                case ScoreType.Sixes:
-                    item.Value.SetScore(diceDot[6] * 6);
-                    break;
-                case ScoreType.Subtotal:
-                    break;
-                case ScoreType.Bonus:
-                    break;
-                case ScoreType.Choice:
-                    foreach (var dot in diceDot)
-                    {
-                        temp += dot.Key * dot.Value;
-                    }
-                    item.Value.SetScore(temp);
-                    break;
-                case ScoreType.FourKind:
-                    foreach (var dot in diceDot)
-                    {
-                        temp += dot.Value;
-                        if (dot.Value == 4)
-                        {
-                            isTrue = true;
-                        }
-                    }
-                    if (isTrue)
-                        item.Value.SetScore(temp);
-                    else
-                        item.Value.SetScore(0);
+                diceDot[item.value] += 1;
+            }
 
-                    break;
-                case ScoreType.FullHouse:
-                    bool fullHouse = false;
-                    foreach (var dot in diceDot)
-                    {
-                        if (!isTrue)
+            foreach (var item in board.playerScore[playerNum])
+            {
+                item.Value.ActiveBtn();
+
+                switch (item.Key)
+                {
+                    case ScoreType.Aces:
+                        item.Value.SetScore(diceDot[1]);
+                        break;
+                    case ScoreType.Deuces:
+                        item.Value.SetScore(diceDot[2] * 2);
+                        break;
+                    case ScoreType.Threes:
+                        item.Value.SetScore(diceDot[3] * 3);
+                        break;
+                    case ScoreType.Fours:
+                        item.Value.SetScore(diceDot[4] * 4);
+                        break;
+                    case ScoreType.Fives:
+                        item.Value.SetScore(diceDot[5] * 5);
+                        break;
+                    case ScoreType.Sixes:
+                        item.Value.SetScore(diceDot[6] * 6);
+                        break;
+                    case ScoreType.Subtotal:
+                        break;
+                    case ScoreType.Bonus:
+                        break;
+                    case ScoreType.Choice:
+                        foreach (var dot in diceDot)
                         {
-                            if (dot.Value == 2 || dot.Value == 3)
+                            temp += dot.Key * dot.Value;
+                        }
+                        item.Value.SetScore(temp);
+                        break;
+                    case ScoreType.FourKind:
+                        foreach (var dot in diceDot)
+                        {
+                            temp += dot.Value;
+                            if (dot.Value == 4)
                             {
-                                temp = dot.Key;
                                 isTrue = true;
                             }
                         }
+                        if (isTrue)
+                            item.Value.SetScore(temp);
                         else
+                            item.Value.SetScore(0);
+
+                        break;
+                    case ScoreType.FullHouse:
+                        bool fullHouse = false;
+                        foreach (var dot in diceDot)
                         {
-                            if(diceDot[temp] == 3)
+                            if (!isTrue)
                             {
-                                if(dot.Value == 2)
+                                if (dot.Value == 2 || dot.Value == 3)
                                 {
-                                    int temp2 = (temp * diceDot[temp]) +
-                                                (dot.Value * dot.Key);
-                                    item.Value.SetScore(temp2);
-                                    fullHouse = true;
-                                    break;
+                                    temp = dot.Key;
+                                    isTrue = true;
                                 }
                             }
-                            else if(diceDot[temp] == 2)
+                            else
                             {
-                                if (dot.Value == 3)
+                                if (diceDot[temp] == 3)
                                 {
-                                    int temp2 = (temp * diceDot[temp]) +
-                                                (dot.Value * dot.Key);
-                                    item.Value.SetScore(temp2);
-                                    fullHouse = true;
-                                    break;
+                                    if (dot.Value == 2)
+                                    {
+                                        int temp2 = (temp * diceDot[temp]) +
+                                                    (dot.Value * dot.Key);
+                                        item.Value.SetScore(temp2);
+                                        fullHouse = true;
+                                        break;
+                                    }
+                                }
+                                else if (diceDot[temp] == 2)
+                                {
+                                    if (dot.Value == 3)
+                                    {
+                                        int temp2 = (temp * diceDot[temp]) +
+                                                    (dot.Value * dot.Key);
+                                        item.Value.SetScore(temp2);
+                                        fullHouse = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
-                    }
-                    if(!fullHouse) 
-                        item.Value.SetScore(0);
-                    break;
-                case ScoreType.S_Straight:
-                    for (int i = 1; i <= 6; i++)
-                    {
-                        if (diceDot[i] != 0)
-                            temp++;
-                        else
-                            temp = 0;
-                    }
-
-                    if (temp == 4)
-                        item.Value.SetScore(15);
-                    else  
-                        item.Value.SetScore(0);
-                    break;
-                case ScoreType.L_Straight:
-                    for (int i = 1; i <= 6; i++)
-                    {
-                        if (diceDot[i] != 0)
-                            temp++;
-                        else
-                            temp = 0;
-                    }
-
-                    if (temp == 5)
-                        item.Value.SetScore(30);
-                    else
-                        item.Value.SetScore(0);
-                    break;
-                case ScoreType.Yacht:
-                    foreach (var dot in diceDot)
-                    {
-                        if(dot.Value == 5)
+                        if (!fullHouse)
+                            item.Value.SetScore(0);
+                        break;
+                    case ScoreType.S_Straight:
+                        for (int i = 1; i <= 6; i++)
                         {
-                            item.Value.SetScore(50);
-                            break;
+                            if (diceDot[i] != 0)
+                                temp++;
+                            else
+                                temp = 0;
                         }
-                    }
-                    if 
-                        (temp == 0) item.Value.SetScore(temp);
-                    break;
-                case ScoreType.Total:
-                    break;
+
+                        if (temp == 4)
+                            item.Value.SetScore(15);
+                        else
+                            item.Value.SetScore(0);
+                        break;
+                    case ScoreType.L_Straight:
+                        for (int i = 1; i <= 6; i++)
+                        {
+                            if (diceDot[i] != 0)
+                                temp++;
+                            else
+                                temp = 0;
+                        }
+
+                        if (temp == 5)
+                            item.Value.SetScore(30);
+                        else
+                            item.Value.SetScore(0);
+                        break;
+                    case ScoreType.Yacht:
+                        foreach (var dot in diceDot)
+                        {
+                            if (dot.Value == 5)
+                            {
+                                item.Value.SetScore(50);
+                                break;
+                            }
+                        }
+                        if
+                            (temp == 0) item.Value.SetScore(temp);
+                        break;
+                    case ScoreType.Total:
+                        break;
+                }
+                temp = 0;
+                isTrue = false;
             }
-            temp = 0;
-            isTrue = false;
+            isPewivew = true;
         }
 
-        phase = Phase.phase2;
     }
     public void EndTurn()
     {
