@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviourPun
             diceDot.Add(i, 0);
         }
 
-        Turn(false);
+       Turn(false);
     }
 
     private void Update()
@@ -174,7 +174,7 @@ public class GameManager : MonoBehaviourPun
     bool isPewivew;
     public void PreviewScore(int playerNum)
     {
-        if (!isPewivew)
+        if (!isPewivew && keepDiceCount > 4)
         {
             int temp = 0;
             bool isTrue = false;
