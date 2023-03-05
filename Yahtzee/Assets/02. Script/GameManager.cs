@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,8 +71,6 @@ public class GameManager : MonoBehaviourPun
             if (Instance != this)
                 Destroy(gameObject);
         }
-
-
     }
 
     void Start()
@@ -133,7 +132,6 @@ public class GameManager : MonoBehaviourPun
                 break;
         }
     }
-
     public void StartRoll()
     {
         startBnt.gameObject.SetActive(false);
@@ -144,10 +142,8 @@ public class GameManager : MonoBehaviourPun
             if (item.gameObject.activeSelf)
                 item.isRoll = true;
         }
-
         chance++;
     }
-
     public void StopRoll()
     {
         stopBnt.gameObject.SetActive(false);
@@ -159,31 +155,24 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
-    public void SelectDice(Dice dice)
+    public void SelectDice(int index, int value)
+    {
+        photonView.RPC("RPCSelectDice", RpcTarget.AllBuffered, index, value);
+    }
+
+    [PunRPC]
+    void RPCSelectDice(int index, int value)
     {
         foreach (var item in spriteManager)
         {
             if (item.diceImg.sprite == null)
             {
-                item.SetSprite(dice);
+                item.SetSprite(index, value);
+                diceList[index].gameObject.SetActive(false);
                 keepDiceCount++;
                 break;
             }
         }
-    }
-
-    List<int> diceIndex= new List<int>();
-
-    [PunRPC]
-    void AddDice(int index)
-    {
-        diceIndex.Add(index);
-    }
-
-    [PunRPC]
-    void RemoveDice(int index)
-    {
-        diceIndex.RemoveAt(index);
     }
 
     void PreviewScore(int playerNum)
@@ -334,7 +323,6 @@ public class GameManager : MonoBehaviourPun
             isTrue = false;
         }
     }
-
     public void EndTurn()
     {
         int totalScore = 0;
@@ -361,7 +349,6 @@ public class GameManager : MonoBehaviourPun
             }
         }
         photonView.RPC("ChangePlayer", RpcTarget.AllBuffered);
-
     }
 
     [PunRPC]

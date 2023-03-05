@@ -10,30 +10,36 @@ public class DiceSpritesManager : MonoBehaviourPun
     public Image diceImg;
 
     public Sprite[] KeepDiceSpr;
-    public Dice dice;
+    public int value;
+    public int index;
+
 
     void Start()
     {
         diceImg.enabled = false;
     }
-    public void SetSprite(Dice dice)
+    public void SetSprite(int value, int index)
     {
-        if (dice.value <= 0)
+        if (value <= 0)
             return;
-        this.dice = dice;
-        photonView.RPC("RPCSyncSprite", RpcTarget.AllBuffered, dice.value - 1);
+
+        this.value = value;
+        this.index = index;
+
+        photonView.RPC("RPCSyncSprite", RpcTarget.AllBuffered, value);
     }
 
     public void RemoveSprite()
     {
         photonView.RPC("RPCRemoveSprite", RpcTarget.AllBuffered);
-
     }
 
     [PunRPC]
-    void RPCSyncSprite(int index)
+    void RPCSyncSprite(int value, int index)
     {
-        diceImg.sprite = KeepDiceSpr[index];
+        diceImg.sprite = KeepDiceSpr[value - 1];
+        this.value = value;
+        this.index = index;
         diceImg.enabled = true;
     }
 
@@ -42,8 +48,8 @@ public class DiceSpritesManager : MonoBehaviourPun
     {
         if (diceImg.enabled)
         {
+            GameManager.Instance.diceList[index].gameObject.SetActive(true);
             diceImg.enabled = false;
-            dice.gameObject.SetActive(true);
             diceImg.sprite = null;
             GameManager.Instance.keepDiceCount--;
         }

@@ -22,6 +22,7 @@ public class Dice : MonoBehaviourPun
     public bool isEnd;
     public bool enabelBtn;
     public int value;
+    public int index;
 
     [SerializeField]
     Material dotActice;
@@ -109,21 +110,19 @@ public class Dice : MonoBehaviourPun
     {
         if (value == 0)
             return;
-        GameManager.Instance.SelectDice(this);
-
-        ActiveDice(false);
+        GameManager.Instance.SelectDice(index, value);
     }
 
-    [PunRPC]
-    void RPCAtiveDice(bool activate)
-    {
-        gameObject.SetActive(activate);
-    }
+    //[PunRPC]
+    //void RPCAtiveDice(bool activate)
+    //{
+    //    gameObject.SetActive(activate);
+    //}
 
-    public void ActiveDice(bool activate)
-    {
-        photonView.RPC("RPCAtiveDice", RpcTarget.AllBuffered, activate);
-    }
+    //public void ActiveDice(bool activate)
+    //{
+    //    photonView.RPC("RPCAtiveDice", RpcTarget.AllBuffered, activate);
+    //}
 
     #region Old Dice
     //[SerializeField] Rigidbody rb;

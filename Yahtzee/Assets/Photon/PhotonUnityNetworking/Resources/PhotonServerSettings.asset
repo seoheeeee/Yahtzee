@@ -50,6 +50,8 @@ MonoBehaviour:
   - RPCRemoveSprite
   - RPCSyncSprite
   - RPCAtiveDice
+  - AddDice
+  - RemoveDice
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
