@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
                 if (isTurn)
                 {
                     GameManager.Instance.Turn(true, num);
+                    GameManager.Instance.PreviewScore(num);
                 }
                 else
                 {

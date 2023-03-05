@@ -105,7 +105,6 @@ public class GameManager : MonoBehaviourPun
         if(keepDiceCount > 4 && phase == Phase.phase1)
         {
             state = State.EndGame;
-            phase = Phase.phase1;
         }
        
         switch (state)
@@ -118,8 +117,7 @@ public class GameManager : MonoBehaviourPun
                 switch (phase)
                 {
                     case Phase.phase1:
-                        PreviewScore(curPlayer.num);
-                        phase = Phase.phase2;
+                        
 
                         break;
                     case Phase.phase2:
@@ -175,8 +173,10 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
-    void PreviewScore(int playerNum)
+    public void PreviewScore(int playerNum)
     {
+        if (phase != Phase.phase1) return;
+        if (state != State.EndGame) return;
         int temp = 0;
         bool isTrue = false;
         
@@ -322,6 +322,8 @@ public class GameManager : MonoBehaviourPun
             temp = 0;
             isTrue = false;
         }
+
+        phase = Phase.phase2;
     }
     public void EndTurn()
     {
