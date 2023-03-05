@@ -9,7 +9,7 @@ public class DiceSpritesManager : MonoBehaviourPun
 {
     
     public Image diceImg;
-
+    public Button button;
     public Sprite[] KeepDiceSpr;
     public int value;
     public int index;
@@ -17,6 +17,7 @@ public class DiceSpritesManager : MonoBehaviourPun
 
     void Start()
     {
+        button = GetComponent<Button>();
         diceImg.enabled = false;
     }
     public void SetSprite(int index, int value)

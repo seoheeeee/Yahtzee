@@ -22,10 +22,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
                 {
                     GameManager.Instance.Turn(true, num);
                     GameManager.Instance.PreviewScore(num);
+                    foreach (var item in GameManager.Instance.spriteManager)
+                        item.button.enabled = true;
                 }
                 else
                 {
                     GameManager.Instance.Turn(false);
+                    foreach (var item in GameManager.Instance.spriteManager)
+                        item.button.enabled = false;
                 }
             }
         }

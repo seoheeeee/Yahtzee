@@ -32,14 +32,13 @@ public class GameManager : MonoBehaviourPun
     Button stopBnt;
     [SerializeField]
     Board board;
-    [SerializeField]
-    List<DiceSpritesManager> spriteManager;
 
     [SerializeField]
     PlayerManager curPlayer;
     [SerializeField]
     PlayerManager restPlayer;
 
+    public List<DiceSpritesManager> spriteManager;
     public List<Dice> diceList;
     public int selectDiceCount;
     public int keepDiceCount;
