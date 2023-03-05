@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviourPun
 
     private void Update()
     {
+        txtChance.text = chance.ToString();
 
         switch (state)
         {
@@ -118,7 +119,6 @@ public class GameManager : MonoBehaviourPun
                 switch (phase)
                 {
                     case Phase.phase1:
-                        
 
                         break;
                     case Phase.phase2:
@@ -133,14 +133,16 @@ public class GameManager : MonoBehaviourPun
     }
     public void StartRoll()
     {
-        startBnt.gameObject.SetActive(false);
-        stopBnt.gameObject.SetActive(true);
-
         foreach (var item in diceList)
         {
             if (item.gameObject.activeSelf)
+            {
+                if (!item.isStop) return;
                 item.isRoll = true;
+            }
         }
+        startBnt.gameObject.SetActive(false);
+        stopBnt.gameObject.SetActive(true);
         chance++;
     }
     public void StopRoll()
@@ -326,8 +328,8 @@ public class GameManager : MonoBehaviourPun
             }
             isPewivew = true;
         }
-
     }
+
     public void EndTurn()
     {
         int totalScore = 0;
@@ -367,6 +369,7 @@ public class GameManager : MonoBehaviourPun
 
         curPlayer.isTurn = true;
         restPlayer.isTurn = false;
+        isPewivew = false;
     }
 
     public void Turn(bool isTurn , int num = 0)

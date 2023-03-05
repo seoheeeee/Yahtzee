@@ -20,6 +20,7 @@ public class Dice : MonoBehaviourPun
     
     public bool isRoll;
     public bool isEnd;
+    public bool isStop;
     public bool enabelBtn;
     public int value;
     public int index;
@@ -47,6 +48,7 @@ public class Dice : MonoBehaviourPun
     {
         if (isRoll)
         {
+            isStop = false;
             foreach (DiceSide item in diceSides)
                 item.meshRenderer.material = dotMaterial;
 
@@ -104,6 +106,8 @@ public class Dice : MonoBehaviourPun
                 item.meshRenderer.material = dotActice;
             }
         }
+
+        isStop = true;
     }
 
     public void SelectDice2()
