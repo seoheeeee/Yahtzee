@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
                 }
                 else
                 {
-                    GameManager.Instance.Turn(false);
+                    //GameManager.Instance.Turn(false);
                     foreach (var item in GameManager.Instance.spriteManager)
                         item.button.enabled = false;
                 }
