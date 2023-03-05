@@ -181,6 +181,7 @@ public class GameManager : MonoBehaviourPun
 
             foreach (Dice item in diceList)
             {
+                if (item.value == 0) return;
                 diceDot[item.value] += 1;
             }
 
