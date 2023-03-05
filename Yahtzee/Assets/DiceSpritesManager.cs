@@ -26,7 +26,7 @@ public class DiceSpritesManager : MonoBehaviourPun
         this.value = value;
         this.index = index;
 
-        photonView.RPC("RPCSyncSprite", RpcTarget.AllBuffered, value);
+        photonView.RPC("RPCSyncSprite", RpcTarget.AllBuffered, value, index);
     }
 
     public void RemoveSprite()
