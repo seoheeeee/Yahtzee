@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -753,7 +753,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 220f52928abd48d42b6279040dc1e218, type: 3}
   - {fileID: 21300000, guid: 8a3356cadea85fa42a13df5d8e07814b, type: 3}
   - {fileID: 21300000, guid: 2c9884031f057c44ca989cead4d171be, type: 3}
-  dice: {fileID: 0}
+  value: 0
+  index: 0
 --- !u!114 &118132083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2156,6 +2157,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 638495648, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: index
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 800714530914659824, guid: b4e6957b802a1e24d89fd4ee8fb6d629,
         type: 3}
       propertyPath: sceneViewId
@@ -2694,7 +2699,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 220f52928abd48d42b6279040dc1e218, type: 3}
   - {fileID: 21300000, guid: 8a3356cadea85fa42a13df5d8e07814b, type: 3}
   - {fileID: 21300000, guid: 2c9884031f057c44ca989cead4d171be, type: 3}
-  dice: {fileID: 0}
+  value: 0
+  index: 0
 --- !u!114 &451186246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4186,6 +4192,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 638495648, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: index
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 800714530914659824, guid: b4e6957b802a1e24d89fd4ee8fb6d629,
         type: 3}
       propertyPath: sceneViewId
@@ -5279,7 +5289,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 220f52928abd48d42b6279040dc1e218, type: 3}
   - {fileID: 21300000, guid: 8a3356cadea85fa42a13df5d8e07814b, type: 3}
   - {fileID: 21300000, guid: 2c9884031f057c44ca989cead4d171be, type: 3}
-  dice: {fileID: 0}
+  value: 0
+  index: 0
 --- !u!114 &819131314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5347,6 +5358,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 638495648, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: index
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 800714530914659824, guid: b4e6957b802a1e24d89fd4ee8fb6d629,
         type: 3}
       propertyPath: sceneViewId
@@ -7569,6 +7584,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 638495648, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: index
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 800714530914659824, guid: b4e6957b802a1e24d89fd4ee8fb6d629,
         type: 3}
       propertyPath: sceneViewId
@@ -9683,7 +9702,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 220f52928abd48d42b6279040dc1e218, type: 3}
   - {fileID: 21300000, guid: 8a3356cadea85fa42a13df5d8e07814b, type: 3}
   - {fileID: 21300000, guid: 2c9884031f057c44ca989cead4d171be, type: 3}
-  dice: {fileID: 0}
+  value: 0
+  index: 0
 --- !u!114 &1667264818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11169,7 +11189,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 220f52928abd48d42b6279040dc1e218, type: 3}
   - {fileID: 21300000, guid: 8a3356cadea85fa42a13df5d8e07814b, type: 3}
   - {fileID: 21300000, guid: 2c9884031f057c44ca989cead4d171be, type: 3}
-  dice: {fileID: 0}
+  value: 0
+  index: 0
 --- !u!114 &1960412297
 MonoBehaviour:
   m_ObjectHideFlags: 0
