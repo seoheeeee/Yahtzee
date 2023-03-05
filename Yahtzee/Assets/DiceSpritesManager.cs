@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System.Threading.Tasks.Sources;
 
 public class DiceSpritesManager : MonoBehaviourPun
 {
@@ -18,7 +19,7 @@ public class DiceSpritesManager : MonoBehaviourPun
     {
         diceImg.enabled = false;
     }
-    public void SetSprite(int value, int index)
+    public void SetSprite(int index, int value)
     {
         if (value <= 0)
             return;
@@ -26,7 +27,7 @@ public class DiceSpritesManager : MonoBehaviourPun
         this.value = value;
         this.index = index;
 
-        photonView.RPC("RPCSyncSprite", RpcTarget.AllBuffered, value, index);
+        photonView.RPC("RPCSyncSprite", RpcTarget.AllBuffered, index, value);
     }
 
     public void RemoveSprite()
@@ -35,7 +36,7 @@ public class DiceSpritesManager : MonoBehaviourPun
     }
 
     [PunRPC]
-    void RPCSyncSprite(int value, int index)
+    void RPCSyncSprite(int index, int value)
     {
         diceImg.sprite = KeepDiceSpr[value - 1];
         this.value = value;
