@@ -56,6 +56,7 @@ public class Score : MonoBehaviourPun
 
     private void Start()
     {
+        scoreBnt.onClick.AddListener(OnClick);
         scoreBnt.onClick.AddListener(GameManager.Instance.EndTurn);
     }
 

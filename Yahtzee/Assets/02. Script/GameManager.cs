@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +28,8 @@ public class GameManager : MonoBehaviourPun
     static GameManager instance;
 
     [SerializeField]
-    Button startBnt;
+    TMP_Text txtChance;
+    
     [SerializeField]
     Button stopBnt;
     [SerializeField]
@@ -38,6 +40,8 @@ public class GameManager : MonoBehaviourPun
     [SerializeField]
     PlayerManager restPlayer;
 
+
+    public Button startBnt;
     public List<DiceSpritesManager> spriteManager;
     public List<Dice> diceList;
     public int selectDiceCount;
@@ -74,6 +78,8 @@ public class GameManager : MonoBehaviourPun
 
     void Start()
     {
+        txtChance.text = chance.ToString();
+
         PlayerManager[] tempPlayer = FindObjectsOfType<PlayerManager>();
 
         foreach (PlayerManager item in tempPlayer)
@@ -101,11 +107,7 @@ public class GameManager : MonoBehaviourPun
 
     private void Update()
     {
-        if(keepDiceCount > 4 && phase == Phase.phase1)
-        {
-            state = State.EndGame;
-        }
-       
+
         switch (state)
         {
             case State.PlayGame:
@@ -332,6 +334,8 @@ public class GameManager : MonoBehaviourPun
 
         foreach (var item in board.playerScore[curPlayer.num])
         {
+            if (item.Value.onClick) item.Value.SetScore(0);
+
             item.Value.DeactiveBtn();
             totalScore += item.Value.score;
             switch (item.Key)
