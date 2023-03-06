@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviourPun
     public Button startBnt;
     public List<DiceSpritesManager> spriteManager;
     public List<Dice> diceList;
-    public int selectDiceCount;
+    //public int selectDiceCount;
     public int keepDiceCount;
     public int chance;
     
@@ -256,7 +256,7 @@ public class GameManager : MonoBehaviourPun
                     case ScoreType.FourKind:
                         foreach (var dot in diceDot)
                         {
-                            temp += dot.Value;
+                            temp += dot.Key;
                             if (dot.Value == 4)
                             {
                                 isTrue = true;
@@ -405,12 +405,15 @@ public class GameManager : MonoBehaviourPun
         curPlayer.isTurn = true;
         restPlayer.isTurn = false;
         isPewivew = false;
+        keepDiceCount = 0;
 
         foreach (Dice item in diceList)
             item.GameReset();
 
         foreach (DiceSpritesManager item in spriteManager)
         {
+            item.index = 0;
+            item.value = 0;
             item.diceImg.enabled = false;
             item.diceImg.sprite = null;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using Photon.Pun;
+using UnityEditor;
 
 public class Dice : MonoBehaviourPun
 {
@@ -76,7 +77,7 @@ public class Dice : MonoBehaviourPun
     }
     public void GameReset()
     {
-        transform.rotation = Quaternion.identity;
+        dice.rotation = Quaternion.identity;
         gameObject.SetActive(true);
 
 
@@ -120,8 +121,14 @@ public class Dice : MonoBehaviourPun
 
         isStop = true;
         GameManager.Instance.phase = Phase.Start;
+        photonView.RPC("EndDiceRoll", RpcTarget.AllBuffered,
+            dice.rotation.x, dice.rotation.y, dice.rotation.z);
     }
-
+    [PunRPC]
+    void EndDiceRoll(float x, float y, float z)
+    {
+        dice.rotation = Quaternion.Euler(x, y, z);
+    }
     public void SelectDice2()
     {
         if (value == 0 || !isStop)

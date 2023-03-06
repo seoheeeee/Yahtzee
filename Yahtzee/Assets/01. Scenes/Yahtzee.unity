@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 14
@@ -871,7 +871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 12
@@ -1169,7 +1169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 9
@@ -1414,7 +1414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 11
@@ -1577,7 +1577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 10
@@ -2125,7 +2125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 4
@@ -2161,6 +2161,14 @@ PrefabInstance:
     - target: {fileID: 638495648, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
       propertyPath: index
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: m_SynchronizePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: m_SynchronizeRotation
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 800714530914659824, guid: b4e6957b802a1e24d89fd4ee8fb6d629,
         type: 3}
@@ -2242,7 +2250,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
 --- !u!1 &430441787
 GameObject:
@@ -2422,7 +2431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 0
@@ -2818,7 +2827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 6
@@ -3063,7 +3072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 7
@@ -3226,7 +3235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 8
@@ -3483,7 +3492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 7
@@ -3916,7 +3925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 13
@@ -4079,7 +4088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 8
@@ -4198,6 +4207,14 @@ PrefabInstance:
       propertyPath: index
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: m_SynchronizePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: m_SynchronizeRotation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 800714530914659824, guid: b4e6957b802a1e24d89fd4ee8fb6d629,
         type: 3}
       propertyPath: sceneViewId
@@ -4278,7 +4295,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
 --- !u!1 &609888051
 GameObject:
@@ -4822,7 +4840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 13
@@ -4903,7 +4921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 3
@@ -5148,7 +5166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 5
@@ -5365,6 +5383,14 @@ PrefabInstance:
       propertyPath: index
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: m_SynchronizePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: m_SynchronizeRotation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 800714530914659824, guid: b4e6957b802a1e24d89fd4ee8fb6d629,
         type: 3}
       propertyPath: sceneViewId
@@ -5445,7 +5471,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
 --- !u!1 &834120718
 GameObject:
@@ -6392,7 +6419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 2
@@ -7350,7 +7377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 4
@@ -7594,6 +7621,14 @@ PrefabInstance:
       propertyPath: index
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: m_SynchronizePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: m_SynchronizeRotation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 800714530914659824, guid: b4e6957b802a1e24d89fd4ee8fb6d629,
         type: 3}
       propertyPath: sceneViewId
@@ -7674,7 +7709,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
 --- !u!1 &1293180041
 GameObject:
@@ -8364,7 +8400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 14
@@ -8527,7 +8563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 9
@@ -8743,7 +8779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 1
@@ -8988,7 +9024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 3
@@ -9485,7 +9521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 1
@@ -10043,7 +10079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 2
@@ -10615,7 +10651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 10
@@ -10860,7 +10896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 6
@@ -11473,7 +11509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 12
@@ -11689,7 +11725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 5
@@ -11847,7 +11883,6 @@ MonoBehaviour:
   - {fileID: 20605194}
   - {fileID: 1450249651}
   - {fileID: 1090341935}
-  selectDiceCount: 0
   keepDiceCount: 0
   chance: 0
 --- !u!4 &2030723780
@@ -11942,7 +11977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 11
@@ -12240,7 +12275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtScore: {fileID: 0}
-  scoreBnt: {fileID: 0}
+  scoreBtn: {fileID: 0}
   score: 0
   onClick: 0
   scoreType: 0
@@ -12628,6 +12663,14 @@ PrefabInstance:
       propertyPath: value
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: m_SynchronizePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
+      propertyPath: m_SynchronizeRotation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 800714530914659824, guid: b4e6957b802a1e24d89fd4ee8fb6d629,
         type: 3}
       propertyPath: sceneViewId
@@ -12708,5 +12751,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2001855286, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b4e6957b802a1e24d89fd4ee8fb6d629, type: 3}

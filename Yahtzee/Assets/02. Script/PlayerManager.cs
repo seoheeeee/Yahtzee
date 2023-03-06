@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
             {
                 if (isTurn)
                 {
-                    GameManager.Instance.Turn(true, num);
+                    //GameManager.Instance.Turn(true, num);
                     GameManager.Instance.PreviewScore(num);
                     GameManager.Instance.startBnt.gameObject.SetActive(true);
                     foreach (var item in GameManager.Instance.spriteManager)

@@ -566,7 +566,7 @@ Transform:
   m_GameObject: {fileID: 6806903036651340492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6484131515202366166}
@@ -597,7 +597,10 @@ MonoBehaviour:
   - {fileID: 6806903035911013790}
   isRoll: 0
   isEnd: 0
+  isStop: 0
+  enabelBtn: 0
   value: 0
+  index: 0
   dotActice: {fileID: 2100000, guid: f6d1ca3e7af8b3841a21f997174d3a4d, type: 2}
   dotMaterial: {fileID: 2100000, guid: dd0416bb41cdd0a46ae7f6c005a929a0, type: 2}
 --- !u!114 &800714530914659824
@@ -619,8 +622,8 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 2001855286}
-  sceneViewId: 0
+  - {fileID: 3257110926346210438}
+  sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1 &6806903037237763564
@@ -967,7 +970,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6806903036484521277}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2001855286
+--- !u!114 &3257110926346210438
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -979,7 +982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
+  m_SynchronizePosition: 0
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
