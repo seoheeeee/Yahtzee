@@ -4,12 +4,10 @@ using Photon.Pun;
 public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback
 {
     public int num;
-    public int turn;
     public bool isTurn;
 
     private void Awake()
     {
-        turn = 13;
         DontDestroyOnLoad(gameObject);
     }
 

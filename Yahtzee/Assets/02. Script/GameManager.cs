@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,19 +31,20 @@ public class GameManager : MonoBehaviourPun
     [SerializeField]
     PlayerManager restPlayer;
 
-
+    public TMP_Text txtTurn; 
     public Button startBnt;
     public List<DiceSpritesManager> spriteManager;
     public List<Dice> diceList;
     //public int selectDiceCount;
     public int keepDiceCount;
     public int chance;
-
+    int turn;
 
     Dictionary<int, int> diceDot;
 
     public static GameManager Instance
     {
+        
         get
         {
             if (instance == null)
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviourPun
 
     void Start()
     {
+        turn = 1;
         txtChance.text = chance.ToString();
 
         PlayerManager[] tempPlayer = FindObjectsOfType<PlayerManager>();
@@ -374,14 +377,23 @@ public class GameManager : MonoBehaviourPun
             }
         }
 
+        if(curPlayer.num == 2)
+        {
+            turn++;
+
+            photonView.RPC("RPCTurnProgress", RpcTarget.AllBuffered, turn);
+        }
+
         photonView.RPC("ChangePlayer", RpcTarget.AllBuffered);
+
+        
+
         board.ChangeBoard();
     }
 
     [PunRPC]
     void ChangePlayer()
     {
-        curPlayer.turn -= 1;
         PlayerManager temp = curPlayer;
         curPlayer = restPlayer;
         restPlayer = temp;
@@ -424,5 +436,11 @@ public class GameManager : MonoBehaviourPun
             board.ActiveButtons(2, false);
 
         }
+    }
+
+    [PunRPC]
+    void RPCTurnProgress(int turn)
+    {
+        txtTurn.text = $"{turn} / 13";
     }
 }
