@@ -74,7 +74,7 @@ public class Dice : MonoBehaviourPun
             }
         }
     }
-    private void GameReset()
+    public void GameReset()
     {
         transform.rotation = Quaternion.identity;
         gameObject.SetActive(true);

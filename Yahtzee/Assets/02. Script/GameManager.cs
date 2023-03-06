@@ -410,7 +410,10 @@ public class GameManager : MonoBehaviourPun
             item.GameReset();
 
         foreach (DiceSpritesManager item in spriteManager)
+        {
+            item.diceImg.enabled = false;
             item.diceImg.sprite = null;
+        }
     }
 
     public void Turn(bool isTurn , int num = 0)
