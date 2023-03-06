@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviourPun
     void Start()
     {
         turn = 1;
+        txtChance.text = "1 / 13";
         txtChance.text = chance.ToString();
 
         PlayerManager[] tempPlayer = FindObjectsOfType<PlayerManager>();
@@ -82,9 +83,13 @@ public class GameManager : MonoBehaviourPun
             {
                 curPlayer = item;
                 curPlayer.isTurn = true;
+                board.txtPlayers[item.num - 1].text = item.gameObject.name;
             }
             else
+            {
                 restPlayer = item;
+                board.txtPlayers[item.num - 1].text = item.gameObject.name;
+            }
         }
         startBnt.gameObject.SetActive(false);
         stopBnt.gameObject.SetActive(false);

@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,19 +8,23 @@ public class Board : MonoBehaviourPun
 {
     [SerializeField]
     Sprite[] sprBoard;
+
     [SerializeField]
     Sprite[] playerTurn;
+
     [SerializeField]
     Image imgBoard;
+
+    [SerializeField]
+    List<Score> player1;
+
+    [SerializeField]
+    List<Score> player2;
 
     Queue<Sprite> boardQueue;
 
     public Dictionary<int, Dictionary<ScoreType, Score>> playerScore;
-
-    [SerializeField]
-    List<Score> player1;
-    [SerializeField]
-    List<Score> player2;
+    public TMP_Text[] txtPlayers;
 
     private void Awake()
     {

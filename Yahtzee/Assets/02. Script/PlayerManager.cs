@@ -1,4 +1,3 @@
-using UnityEngine;
 using Photon.Pun;
 
 public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback
@@ -40,10 +39,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
         {
             photonView.RPC("SetPlayer",
                 RpcTarget.AllBuffered,
-                PhotonNetwork.PlayerList.Length);
-            gameObject.name = "Player" + num.ToString();
+                PhotonNetwork.PlayerList.Length,
+                PhotonNetwork.LocalPlayer.NickName);
         }
     }
     [PunRPC]
-    void SetPlayer(int num) => this.num = num;
+    void SetPlayer(int num, string name)
+    {
+        this.num = num;
+        gameObject.name = name;
+    }
 }
