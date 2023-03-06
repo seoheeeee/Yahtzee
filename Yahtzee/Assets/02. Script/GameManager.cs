@@ -10,17 +10,10 @@ public enum State
     EndGame
 }
 
-public enum Phase
-{
-    Start,
-    Progress,
-    End,
-}
 
 public class GameManager : MonoBehaviourPun
 {
     public State state;
-    public Phase phase;
 
     static GameManager instance;
 
@@ -110,59 +103,39 @@ public class GameManager : MonoBehaviourPun
         switch (state)
         {
             case State.PlayGame:
-                switch (phase)
+                //if (curPlayer.turn == 0 && restPlayer.turn == 0)
+
+                if (keepDiceCount < 5)
                 {
-                    case Phase.Start:
-                        if (keepDiceCount < 5)
+                    isPewivew = false;
+                    foreach (var item in board.playerScore[curPlayer.num])
+                    {
+                        if (!item.Value.onClick)
                         {
-                            isPewivew = false;
-                            foreach (var item in board.playerScore[curPlayer.num])
-                            {
-                                if (!item.Value.onClick)
-                                {
-                                    item.Value.scoreBtn.enabled = false;
-                                    item.Value.txtScore.color = Color.black;
+                            item.Value.scoreBtn.enabled = false;
+                            item.Value.txtScore.color = Color.black;
 
-                                    if (item.Key == ScoreType.Total) continue;
-                                    else if (item.Key == ScoreType.Subtotal) continue;
-                                    else if (item.Key == ScoreType.Bonus) continue;
+                            if (item.Key == ScoreType.Total) continue;
+                            else if (item.Key == ScoreType.Subtotal) continue;
+                            else if (item.Key == ScoreType.Bonus) continue;
 
-                                    item.Value.SetScore(0);
-                                    item.Value.score = 0;
-                                    
-                                }
-                            }
+                            item.Value.SetScore(0);
+                            item.Value.score = 0;
+
                         }
-
-                        break;
-                    case Phase.Progress:
-
-                        break;
-                    case Phase.End:
-
-                        break;
+                    }
                 }
-                break;
-            case State.EndGame:
-
+                if (chance == 3)
+                    startBnt.gameObject.SetActive(false);
                 break;
         }
     }
-    public bool StatePhase(State state, Phase phase)
-    {
-        if (this.state != state) return false;
-        if (this.phase != phase) return false;
-        return true;
-    }
-    void StatePhaseChange(State state, Phase phase)
-    {
-        this.state = state;
-        this.phase = phase;
-    }
+
+
     public void StartRoll()
     {
 
-        if (!StatePhase(State.PlayGame, Phase.Start) ||
+        if ( state != State.PlayGame ||
             keepDiceCount == 5)
             return;
 
@@ -176,7 +149,7 @@ public class GameManager : MonoBehaviourPun
         startBnt.gameObject.SetActive(false);
         stopBnt.gameObject.SetActive(true);
         chance++;
-        StatePhaseChange(State.PlayGame, Phase.Progress);
+        state = State.EndGame;
     }
     public void StopRoll()
     {
@@ -400,12 +373,15 @@ public class GameManager : MonoBehaviourPun
                     break;
             }
         }
+
         photonView.RPC("ChangePlayer", RpcTarget.AllBuffered);
+        board.ChangeBoard();
     }
 
     [PunRPC]
     void ChangePlayer()
     {
+        curPlayer.turn -= 1;
         PlayerManager temp = curPlayer;
         curPlayer = restPlayer;
         restPlayer = temp;

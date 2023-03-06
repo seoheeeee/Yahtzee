@@ -120,14 +120,12 @@ public class Dice : MonoBehaviourPun
         }
 
         isStop = true;
-        GameManager.Instance.phase = Phase.Start;
-        //photonView.RPC("EndDiceRoll", RpcTarget.AllBuffered,
-        //    dice.rotation.x, dice.rotation.y, dice.rotation.z);
+        GameManager.Instance.state = State.PlayGame;
     }
     [PunRPC]
     void EndDiceRoll(float x, float y, float z)
     {
-        //dice.rotation = Quaternion.Euler(x, y, z);
+        
     }
     public void SelectDice2()
     {

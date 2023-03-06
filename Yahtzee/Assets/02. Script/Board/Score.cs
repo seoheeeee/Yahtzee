@@ -48,16 +48,18 @@ public class Score : MonoBehaviourPun
 
         green = new Color(0, 128f / 255f, 0);
         black = Color.black;
-
     }
-
     private void Start()
     {
         scoreBtn.onClick.AddListener(OnClick);
         scoreBtn.onClick.AddListener(GameManager.Instance.EndTurn);
     }
-
-
+    private void Update()
+    {
+        if (scoreType == ScoreType.Bonus) scoreBtn.enabled = false;
+        if (scoreType == ScoreType.Subtotal) scoreBtn.enabled = false;
+        if (scoreType == ScoreType.Total) scoreBtn.enabled = false;
+    }
 
     public void SetScore(int score)
     {

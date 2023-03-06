@@ -1,14 +1,18 @@
-using System.Collections;
+using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Board : MonoBehaviour
+public class Board : MonoBehaviourPun
 {
     [SerializeField]
-    Sprite[] board;
+    Sprite[] sprBoard;
     [SerializeField]
     Sprite[] playerTurn;
+    [SerializeField]
+    Image imgBoard;
+
+    Queue<Sprite> boardQueue;
 
     public Dictionary<int, Dictionary<ScoreType, Score>> playerScore;
 
@@ -19,6 +23,9 @@ public class Board : MonoBehaviour
 
     private void Awake()
     {
+        boardQueue.Enqueue(sprBoard[1]);
+        boardQueue.Enqueue(sprBoard[0]);
+
         playerScore = new Dictionary<int, Dictionary<ScoreType, Score>>();
 
         Dictionary<ScoreType, Score> temp = new Dictionary<ScoreType, Score>();
@@ -32,6 +39,8 @@ public class Board : MonoBehaviour
             temp2.Add(item.scoreType, item);
 
         playerScore.Add(2, temp2);
+
+
     }
 
     public void ActiveButtons(int num ,bool isActive)
@@ -47,6 +56,18 @@ public class Board : MonoBehaviour
                 item.Value.DeactiveBtn();
         }
     }
+
+    public void ChangeBoard()=> photonView.RPC("RPCChangeBoard", RpcTarget.AllBuffered);
+    [PunRPC]
+    void RPCChangeBoard()
+    {
+        Sprite sprite = boardQueue.Dequeue();
+
+        imgBoard.sprite = sprite;
+
+        boardQueue.Enqueue(sprite);
+    }
+
 }
 
 

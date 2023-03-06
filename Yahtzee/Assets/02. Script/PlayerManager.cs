@@ -4,10 +4,12 @@ using Photon.Pun;
 public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback
 {
     public int num;
+    public int turn;
     public bool isTurn;
 
     private void Awake()
     {
+        turn = 13;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -20,7 +22,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
             {
                 if (isTurn)
                 {
-                    //GameManager.Instance.Turn(true, num);
                     GameManager.Instance.PreviewScore(num);
                     GameManager.Instance.startBnt.gameObject.SetActive(true);
                     foreach (var item in GameManager.Instance.spriteManager)
@@ -29,7 +30,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
                 else
                 {
                     GameManager.Instance.startBnt.gameObject.SetActive(false);
-                    //GameManager.Instance.Turn(false);
                     foreach (var item in GameManager.Instance.spriteManager)
                         item.button.enabled = false;
                 }
