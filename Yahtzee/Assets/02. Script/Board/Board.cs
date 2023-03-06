@@ -23,6 +23,7 @@ public class Board : MonoBehaviourPun
 
     private void Awake()
     {
+        boardQueue = new Queue<Sprite>();
         boardQueue.Enqueue(sprBoard[1]);
         boardQueue.Enqueue(sprBoard[0]);
 
