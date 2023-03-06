@@ -78,6 +78,12 @@ public class Dice : MonoBehaviourPun
     {
         transform.rotation = Quaternion.identity;
         gameObject.SetActive(true);
+
+
+        foreach (DiceSide item in diceSides)
+        {
+             item.meshRenderer.material = dotMaterial;
+        }
     }
     IEnumerator EndDiceRoll(int count)
     {
