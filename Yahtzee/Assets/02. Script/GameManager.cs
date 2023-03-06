@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviourPun
                                     item.Value.SetScore(0);
                                     item.Value.score = 0;
                                 }
-                            } 
+                            }
                         }
                         break;
                     case Phase.Progress:
@@ -367,10 +367,11 @@ public class GameManager : MonoBehaviourPun
     public void EndTurn()
     {
         int totalScore = 0;
+        chance = 0;
 
         foreach (var item in board.playerScore[curPlayer.num])
         {
-            if (item.Value.onClick) item.Value.SetScore(0);
+            if (!item.Value.onClick) item.Value.SetScore(0);
 
             item.Value.DeactiveBtn();
             totalScore += item.Value.score;
@@ -404,6 +405,12 @@ public class GameManager : MonoBehaviourPun
         curPlayer.isTurn = true;
         restPlayer.isTurn = false;
         isPewivew = false;
+
+        foreach (Dice item in diceList)
+            item.GameReset();
+
+        foreach (DiceSpritesManager item in spriteManager)
+            item.diceImg.sprite = null;
     }
 
     public void Turn(bool isTurn , int num = 0)

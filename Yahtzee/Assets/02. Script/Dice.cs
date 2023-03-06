@@ -30,6 +30,8 @@ public class Dice : MonoBehaviourPun
     [SerializeField]
     Material dotMaterial;
 
+
+
     private void Start()
     {
         rand = new System.Random();
@@ -42,7 +44,6 @@ public class Dice : MonoBehaviourPun
         startRotation = dice.rotation;
         endRotation = Quaternion.Euler(randRotation[index]);
     }
-
 
     private void Update()
     {
@@ -73,7 +74,11 @@ public class Dice : MonoBehaviourPun
             }
         }
     }
-
+    private void GameReset()
+    {
+        transform.rotation = Quaternion.identity;
+        gameObject.SetActive(true);
+    }
     IEnumerator EndDiceRoll(int count)
     {
         for (int i = count; i > 0; i--)
