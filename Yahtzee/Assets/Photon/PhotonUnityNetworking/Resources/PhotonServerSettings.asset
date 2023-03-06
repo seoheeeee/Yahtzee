@@ -55,6 +55,7 @@ MonoBehaviour:
   - SelectDice
   - RPCActiveDice
   - RPCSelectDice
+  - EndDiceRoll
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
