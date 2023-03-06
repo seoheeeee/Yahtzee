@@ -1,9 +1,6 @@
 using Photon.Pun;
-using Photon.Realtime;
 using System.Collections.Generic;
-using System.Diagnostics;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +26,7 @@ public class GameManager : MonoBehaviourPun
 
     [SerializeField]
     TMP_Text txtChance;
-    
+
     [SerializeField]
     Button stopBnt;
     [SerializeField]
@@ -47,7 +44,7 @@ public class GameManager : MonoBehaviourPun
     //public int selectDiceCount;
     public int keepDiceCount;
     public int chance;
-    
+
 
     Dictionary<int, int> diceDot;
 
@@ -103,7 +100,7 @@ public class GameManager : MonoBehaviourPun
             diceDot.Add(i, 0);
         }
 
-       Turn(false);
+        Turn(false);
     }
 
     private void Update()
@@ -123,11 +120,20 @@ public class GameManager : MonoBehaviourPun
                             {
                                 if (!item.Value.onClick)
                                 {
+                                    item.Value.scoreBtn.enabled = false;
+                                    item.Value.txtScore.color = Color.black;
+
+                                    if (item.Key == ScoreType.Total) continue;
+                                    else if (item.Key == ScoreType.Subtotal) continue;
+                                    else if (item.Key == ScoreType.Bonus) continue;
+
                                     item.Value.SetScore(0);
                                     item.Value.score = 0;
+                                    
                                 }
                             }
                         }
+
                         break;
                     case Phase.Progress:
 
@@ -150,12 +156,14 @@ public class GameManager : MonoBehaviourPun
     }
     void StatePhaseChange(State state, Phase phase)
     {
-        this.state= state;
+        this.state = state;
         this.phase = phase;
     }
     public void StartRoll()
     {
-        if (!StatePhase(State.PlayGame, Phase.Start))
+
+        if (!StatePhase(State.PlayGame, Phase.Start) ||
+            keepDiceCount == 5)
             return;
 
         foreach (var item in diceList)
@@ -203,7 +211,7 @@ public class GameManager : MonoBehaviourPun
     bool isPewivew;
     public void PreviewScore(int playerNum)
     {
-        
+
         if (!isPewivew && keepDiceCount > 4)
         {
             for (int i = 1; i < 7; i++)
@@ -215,7 +223,7 @@ public class GameManager : MonoBehaviourPun
             foreach (Dice item in diceList)
             {
                 if (item.value == 0) return;
-                diceDot[item.value] += 1;   
+                diceDot[item.value] += 1;
             }
 
             foreach (var item in board.playerScore[playerNum])
@@ -256,7 +264,7 @@ public class GameManager : MonoBehaviourPun
                     case ScoreType.FourKind:
                         foreach (var dot in diceDot)
                         {
-                            temp += dot.Key;
+                            temp += dot.Key * dot.Value;
                             if (dot.Value == 4)
                             {
                                 isTrue = true;
@@ -419,16 +427,16 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
-    public void Turn(bool isTurn , int num = 0)
+    public void Turn(bool isTurn, int num = 0)
     {
         if (isTurn)
         {
-            if(state == State.PlayGame)
+            if (state == State.PlayGame)
                 startBnt.gameObject.SetActive(true);
             else
                 startBnt.gameObject.SetActive(false);
 
-            if(keepDiceCount == 5)
+            if (keepDiceCount == 5)
                 board.ActiveButtons(num, true);
             else
                 board.ActiveButtons(num, false);

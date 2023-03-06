@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
 
-public enum ScoreType 
+public enum ScoreType
 {
     Aces,
     Deuces,
@@ -28,8 +26,8 @@ public enum ScoreType
 
 public class Score : MonoBehaviourPun
 {
-    [SerializeField]
-    TMP_Text txtScore;
+    
+    public TMP_Text txtScore;
     public Button scoreBtn;
 
     Color green, black;
@@ -46,7 +44,7 @@ public class Score : MonoBehaviourPun
 
         scoreBtn = transform.GetComponent<Button>();
         scoreBtn.enabled = true;
-       
+
 
         green = new Color(0, 128f / 255f, 0);
         black = Color.black;
@@ -63,7 +61,8 @@ public class Score : MonoBehaviourPun
 
     public void SetScore(int score)
     {
-        txtScore.text = $"{score}";
+        if (!onClick)
+            txtScore.text = $"{score}";
     }
 
     [PunRPC]
@@ -80,14 +79,17 @@ public class Score : MonoBehaviourPun
     public void OnClick()
     {
         score = int.Parse(txtScore.text);
+        PVEndTurn(score);
         txtScore.color = Color.black;
-        onClick = true;
+        photonView.RPC("OnClickButton", RpcTarget.AllBuffered);
         scoreBtn.enabled = false;
     }
 
+    [PunRPC]
+    void OnClickButton() => onClick = true;
     public void ActiveBtn()
     {
-        if(!onClick)
+        if (!onClick)
         {
             scoreBtn.enabled = true;
             txtScore.color = green;
