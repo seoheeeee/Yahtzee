@@ -15,9 +15,9 @@ public enum State
 
 public enum Phase
 {
-    phase1,
-    phase2,
-    phase3
+    Start,
+    Progress,
+    End,
 }
 
 public class GameManager : MonoBehaviourPun
@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviourPun
     public int selectDiceCount;
     public int keepDiceCount;
     public int chance;
+    
 
     Dictionary<int, int> diceDot;
 
@@ -112,38 +113,62 @@ public class GameManager : MonoBehaviourPun
         switch (state)
         {
             case State.PlayGame:
-                if (chance >= 3)
-                    state = State.EndGame;
-                break;
-            case State.EndGame:
                 switch (phase)
                 {
-                    case Phase.phase1:
+                    case Phase.Start:
+                        if (keepDiceCount < 5)
+                        {
+                            isPewivew = false;
+                            foreach (var item in board.playerScore[curPlayer.num])
+                            {
+                                if (!item.Value.onClick)
+                                {
+                                    item.Value.SetScore(0);
+                                    item.Value.score = 0;
+                                }
+                            } 
+                        }
+                        break;
+                    case Phase.Progress:
 
                         break;
-                    case Phase.phase2:
-
-                        break;
-                    case Phase.phase3:
+                    case Phase.End:
 
                         break;
                 }
                 break;
+            case State.EndGame:
+
+                break;
         }
+    }
+    public bool StatePhase(State state, Phase phase)
+    {
+        if (this.state != state) return false;
+        if (this.phase != phase) return false;
+        return true;
+    }
+    void StatePhaseChange(State state, Phase phase)
+    {
+        this.state= state;
+        this.phase = phase;
     }
     public void StartRoll()
     {
+        if (!StatePhase(State.PlayGame, Phase.Start))
+            return;
+
         foreach (var item in diceList)
         {
             if (item.gameObject.activeSelf)
             {
-                if (!item.isStop) return;
                 item.isRoll = true;
             }
         }
         startBnt.gameObject.SetActive(false);
         stopBnt.gameObject.SetActive(true);
         chance++;
+        StatePhaseChange(State.PlayGame, Phase.Progress);
     }
     public void StopRoll()
     {
@@ -178,15 +203,19 @@ public class GameManager : MonoBehaviourPun
     bool isPewivew;
     public void PreviewScore(int playerNum)
     {
+        
         if (!isPewivew && keepDiceCount > 4)
         {
+            for (int i = 1; i < 7; i++)
+                diceDot[i] = 0;
+
             int temp = 0;
             bool isTrue = false;
 
             foreach (Dice item in diceList)
             {
                 if (item.value == 0) return;
-                diceDot[item.value] += 1;
+                diceDot[item.value] += 1;   
             }
 
             foreach (var item in board.playerScore[playerNum])
@@ -284,7 +313,10 @@ public class GameManager : MonoBehaviourPun
                         for (int i = 1; i <= 6; i++)
                         {
                             if (diceDot[i] != 0)
+                            {
                                 temp++;
+                                if (temp == 4) break;
+                            }
                             else
                                 temp = 0;
                         }
@@ -298,11 +330,13 @@ public class GameManager : MonoBehaviourPun
                         for (int i = 1; i <= 6; i++)
                         {
                             if (diceDot[i] != 0)
+                            {
                                 temp++;
+                                if (temp == 5) break;
+                            }
                             else
                                 temp = 0;
                         }
-
                         if (temp == 5)
                             item.Value.SetScore(30);
                         else
@@ -381,7 +415,10 @@ public class GameManager : MonoBehaviourPun
             else
                 startBnt.gameObject.SetActive(false);
 
-            board.ActiveButtons(num, true);
+            if(keepDiceCount == 5)
+                board.ActiveButtons(num, true);
+            else
+                board.ActiveButtons(num, false);
         }
         else
         {

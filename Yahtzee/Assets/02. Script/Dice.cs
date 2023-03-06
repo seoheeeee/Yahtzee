@@ -108,11 +108,12 @@ public class Dice : MonoBehaviourPun
         }
 
         isStop = true;
+        GameManager.Instance.phase = Phase.Start;
     }
 
     public void SelectDice2()
     {
-        if (value == 0)
+        if (value == 0 || !isStop)
             return;
         GameManager.Instance.SelectDice(index, value);
     }

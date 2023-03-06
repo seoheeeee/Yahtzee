@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Board : MonoBehaviour
 {
     [SerializeField]
-    Sprite board;
+    Sprite[] board;
     [SerializeField]
     Sprite[] playerTurn;
 

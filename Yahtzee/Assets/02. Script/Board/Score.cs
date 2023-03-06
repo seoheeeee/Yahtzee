@@ -30,8 +30,7 @@ public class Score : MonoBehaviourPun
 {
     [SerializeField]
     TMP_Text txtScore;
-    [SerializeField]
-    Button scoreBnt;
+    public Button scoreBtn;
 
     Color green, black;
     public int score;
@@ -45,8 +44,8 @@ public class Score : MonoBehaviourPun
         txtScore = transform.GetChild(0).GetComponent<TMP_Text>();
         txtScore.text = "0";
 
-        scoreBnt = transform.GetComponent<Button>();
-        scoreBnt.enabled = true;
+        scoreBtn = transform.GetComponent<Button>();
+        scoreBtn.enabled = true;
        
 
         green = new Color(0, 128f / 255f, 0);
@@ -56,8 +55,8 @@ public class Score : MonoBehaviourPun
 
     private void Start()
     {
-        scoreBnt.onClick.AddListener(OnClick);
-        scoreBnt.onClick.AddListener(GameManager.Instance.EndTurn);
+        scoreBtn.onClick.AddListener(OnClick);
+        scoreBtn.onClick.AddListener(GameManager.Instance.EndTurn);
     }
 
 
@@ -83,21 +82,21 @@ public class Score : MonoBehaviourPun
         score = int.Parse(txtScore.text);
         txtScore.color = Color.black;
         onClick = true;
-        scoreBnt.enabled = false;
+        scoreBtn.enabled = false;
     }
 
     public void ActiveBtn()
     {
         if(!onClick)
         {
-            scoreBnt.enabled = true;
+            scoreBtn.enabled = true;
             txtScore.color = green;
         }
     }
 
     public void DeactiveBtn()
     {
-        scoreBnt.enabled = false;
+        scoreBtn.enabled = false;
         txtScore.color = black;
         PVEndTurn(int.Parse(txtScore.text));
     }
