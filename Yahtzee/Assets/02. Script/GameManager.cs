@@ -71,9 +71,9 @@ public class GameManager : MonoBehaviourPun
 
     void Start()
     {
+        photonView.RPC("RPCChance", RpcTarget.AllBuffered, chance);
         turn = 1;
-        txtChance.text = "1 / 13";
-        txtChance.text = chance.ToString();
+        txtTurn.text = "1 / 13";
 
         PlayerManager[] tempPlayer = FindObjectsOfType<PlayerManager>();
 
@@ -102,11 +102,12 @@ public class GameManager : MonoBehaviourPun
         }
 
         Turn(false);
+        photonView.RPC("RPCChance", RpcTarget.AllBuffered, chance);
     }
 
     private void Update()
     {
-        txtChance.text = chance.ToString();
+        //txtChance.text = chance.ToString();
 
         switch (state)
         {
@@ -157,7 +158,13 @@ public class GameManager : MonoBehaviourPun
         startBnt.gameObject.SetActive(false);
         stopBnt.gameObject.SetActive(true);
         chance++;
+        photonView.RPC("RPCChance", RpcTarget.AllBuffered, chance);
         state = State.EndGame;
+    }
+    [PunRPC]
+    void RPCChance(int chance)
+    {
+        txtChance.text = $"{chance} of 3";
     }
     public void StopRoll()
     {
@@ -390,8 +397,7 @@ public class GameManager : MonoBehaviourPun
         }
 
         photonView.RPC("ChangePlayer", RpcTarget.AllBuffered);
-
-        
+        photonView.RPC("RPCChance", RpcTarget.AllBuffered, chance);
 
         board.ChangeBoard();
     }
@@ -409,7 +415,7 @@ public class GameManager : MonoBehaviourPun
         keepDiceCount = 0;
 
         foreach (Dice item in diceList)
-            item.GameReset();
+            item.GameReset(curPlayer.num - 1);
 
         foreach (DiceSpritesManager item in spriteManager)
         {

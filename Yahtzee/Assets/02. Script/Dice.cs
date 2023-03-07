@@ -75,11 +75,12 @@ public class Dice : MonoBehaviourPun
             }
         }
     }
-    public void GameReset()
+    public void GameReset(int playerIndedx)
     {
         dice.rotation = Quaternion.identity;
         gameObject.SetActive(true);
 
+        photonView.TransferOwnership(PhotonNetwork.PlayerList[playerIndedx]);
 
         foreach (DiceSide item in diceSides)
         {
@@ -122,11 +123,7 @@ public class Dice : MonoBehaviourPun
         isStop = true;
         GameManager.Instance.state = State.PlayGame;
     }
-    [PunRPC]
-    void EndDiceRoll(float x, float y, float z)
-    {
-        
-    }
+
     public void SelectDice2()
     {
         if (value == 0 || !isStop)
