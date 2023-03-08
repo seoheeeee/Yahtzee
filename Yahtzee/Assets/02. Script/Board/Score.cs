@@ -26,11 +26,11 @@ public enum ScoreType
 
 public class Score : MonoBehaviourPun
 {
-    
+
     public TMP_Text txtScore;
     public Button scoreBtn;
 
-    Color green, black;
+    Color green, gray;
     public int score;
 
     public bool onClick;
@@ -40,19 +40,24 @@ public class Score : MonoBehaviourPun
     private void Awake()
     {
         txtScore = transform.GetChild(0).GetComponent<TMP_Text>();
-        txtScore.text = "0";
+        
+        if (scoreType != ScoreType.Subtotal)
+            txtScore.text = "";
+        else
+            txtScore.text = "0 / 63";
 
         scoreBtn = transform.GetComponent<Button>();
         scoreBtn.enabled = true;
 
-
-        green = new Color(0, 128f / 255f, 0);
-        black = Color.black;
+        gray = new Color(30f / 255f, 30f / 255f, 30f / 255f, 0.5f);
+        green = new Color(0, 128f / 255f, 0, 0.7f);
+        //black = Color.black;
     }
     private void Start()
     {
         scoreBtn.onClick.AddListener(OnClick);
         scoreBtn.onClick.AddListener(GameManager.Instance.EndTurn);
+        DeactiveBtn();
     }
     private void Update()
     {
@@ -61,19 +66,28 @@ public class Score : MonoBehaviourPun
         if (scoreType == ScoreType.Total) scoreBtn.enabled = false;
     }
 
-    public void SetScore(int score)
-    {
-        if (!onClick)
-            txtScore.text = $"{score}";
-    }
-
     [PunRPC]
     void RPCSetScore(int score)
     {
-        txtScore.text = $"{score}";
+        if (ScoreType.Subtotal == scoreType)
+        {
+            txtScore.text = $"{score} / 63";
+            return;
+        }
+        else if (ScoreType.Bonus == scoreType)
+        {
+            if (score != 0)
+                txtScore.text = $"+{score}";
+            return;
+        }
+        if (!onClick)
+        {
+            txtScore.color = gray;
+            txtScore.text = $"{score}";
+        }
     }
 
-    public void PVEndTurn(int score)
+    public void SetScore(int score)
     {
         photonView.RPC("RPCSetScore", RpcTarget.AllBuffered, score);
     }
@@ -81,27 +95,34 @@ public class Score : MonoBehaviourPun
     public void OnClick()
     {
         score = int.Parse(txtScore.text);
-        PVEndTurn(score);
-        txtScore.color = Color.black;
+        SetScore(score);
         photonView.RPC("OnClickButton", RpcTarget.AllBuffered);
         scoreBtn.enabled = false;
     }
 
     [PunRPC]
-    void OnClickButton() => onClick = true;
+    void OnClickButton() 
+    {
+        txtScore.color = Color.black;
+        onClick = true;
+    }
     public void ActiveBtn()
     {
         if (!onClick)
         {
             scoreBtn.enabled = true;
-            txtScore.color = green;
+            if (scoreType != ScoreType.Subtotal)
+                txtScore.color = green;
         }
     }
 
     public void DeactiveBtn()
     {
         scoreBtn.enabled = false;
-        txtScore.color = black;
-        PVEndTurn(int.Parse(txtScore.text));
+        if (scoreType != ScoreType.Subtotal && txtScore.text != "")
+        {
+            txtScore.color = Color.black;
+            SetScore(int.Parse(txtScore.text));
+        }
     }
 }

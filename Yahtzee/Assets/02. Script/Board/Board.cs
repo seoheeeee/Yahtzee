@@ -49,19 +49,6 @@ public class Board : MonoBehaviourPun
 
     }
 
-    public void ActiveButtons(int num ,bool isActive)
-    {
-        if (isActive)
-        {
-            foreach (var item in playerScore[num])
-                item.Value.ActiveBtn();
-        }
-        else
-        {
-            foreach (var item in playerScore[num])
-                item.Value.DeactiveBtn();
-        }
-    }
 
     public void ChangeBoard()=> photonView.RPC("RPCChangeBoard", RpcTarget.AllBuffered);
     [PunRPC]

@@ -36,6 +36,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+
+        Screen.SetResolution(1920, 1080, false);
+
         SceneBtn.SetActive(false);
     }
 

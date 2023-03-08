@@ -64,6 +64,10 @@ MonoBehaviour:
   - RandDice
   - RPCDiceEnd
   - RPCDiceRoll
+  - ResetBoard
+  - Result
+  - StopDice
+  - ChangeState
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

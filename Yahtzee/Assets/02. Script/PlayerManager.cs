@@ -19,7 +19,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
             {
                 if (isTurn)
                 {
-                    GameManager.Instance.PreviewScore(num);
+                    //GameManager.Instance.PreviewScore(num);
+                    if(GameManager.Instance.state == State.PlayGame)
                     GameManager.Instance.startBnt.gameObject.SetActive(true);
                     foreach (var item in GameManager.Instance.spriteManager)
                         item.button.enabled = true;

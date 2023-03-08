@@ -54,6 +54,8 @@ public class DiceSpritesManager : MonoBehaviourPun
             diceImg.enabled = false;
             diceImg.sprite = null;
             GameManager.Instance.keepDiceCount--;
+            value = 0;
+            index = 0;
         }
     }
 }

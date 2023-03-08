@@ -50,7 +50,7 @@ public class Dice : MonoBehaviourPun
     {
         if (isRoll)
         {
-            isStop = false;
+            
             foreach (DiceSide item in diceSides)
                 item.meshRenderer.material = dotMaterial;
 
@@ -121,8 +121,13 @@ public class Dice : MonoBehaviourPun
         }
 
         isStop = true;
-        GameManager.Instance.state = State.PlayGame;
     }
+
+    //[PunRPC]
+    //void StopDice(bool isStop)
+    //{
+    //    this.isStop = isStop;
+    //}
 
     public void SelectDice2()
     {
