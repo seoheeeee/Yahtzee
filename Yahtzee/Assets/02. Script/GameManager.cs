@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public enum State
 {
     PlayGame,
+    DiceRoll,
     EndGame
 }
 
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviourPun
     {
         photonView.RPC("RPCChance", RpcTarget.AllBuffered, chance);
         turn = 1;
-        txtTurn.text = "1 / 13";
+        txtTurn.text = "1 / 12";
         chance = 3;
 
         PlayerManager[] tempPlayer = FindObjectsOfType<PlayerManager>();
@@ -125,9 +126,17 @@ public class GameManager : MonoBehaviourPun
 
                     if (chance == 0)
                         startBnt.gameObject.SetActive(false);
+                    else
+                    startBnt.gameObject.SetActive(true);
+
+                    foreach (var item in spriteManager)
+                        item.button.enabled = true;
 
                     break;
-                case State.EndGame:
+                case State.DiceRoll:
+                    foreach (var item in spriteManager)
+                        item.button.enabled = false;
+
                     foreach (var item in board.playerScore[curPlayer.num])
                     {
                         if (!item.Value.onClick)
@@ -147,7 +156,15 @@ public class GameManager : MonoBehaviourPun
                     state = State.PlayGame;
                     //photonView.RPC("ChangeState", RpcTarget.AllBuffered, (int)State.PlayGame);
                     break;
+                case State.EndGame:
+                    break;
             }
+        }
+        else
+        {
+            startBnt.gameObject.SetActive(false);
+            foreach (var item in spriteManager)
+                item.button.enabled = false;
         }
     }
     [PunRPC]
@@ -176,7 +193,7 @@ public class GameManager : MonoBehaviourPun
         chance--;
         photonView.RPC("RPCChance", RpcTarget.AllBuffered, chance);
         photonView.RPC("ResetBoard", RpcTarget.AllBuffered);
-        state = State.EndGame;
+        state = State.DiceRoll;
         //photonView.RPC("ChangeState", RpcTarget.AllBuffered, (int)State.EndGame);
     }
 
@@ -453,6 +470,14 @@ public class GameManager : MonoBehaviourPun
     }
     public void EndTurn()
     {
+
+        if (curPlayer.num == 2)
+        {
+            turn++;
+
+            photonView.RPC("RPCTurnProgress", RpcTarget.AllBuffered, turn);
+        }
+
         int totalScore = 0;
         chance = 3;
 
@@ -480,12 +505,7 @@ public class GameManager : MonoBehaviourPun
             }
         }
 
-        if (curPlayer.num == 2)
-        {
-            turn++;
 
-            photonView.RPC("RPCTurnProgress", RpcTarget.AllBuffered, turn);
-        }
         photonView.RPC("ResetBoard", RpcTarget.AllBuffered);
 
         photonView.RPC("ChangePlayer", RpcTarget.AllBuffered);
@@ -524,6 +544,6 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     void RPCTurnProgress(int turn)
     {
-        txtTurn.text = $"{turn} / 13";
+        txtTurn.text = $"{turn} / 12";
     }
 }

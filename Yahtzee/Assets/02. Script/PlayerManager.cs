@@ -10,30 +10,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Update()
-    {
-
-        if (GameManager.Instance != null)
-        {
-            if (photonView.IsMine)
-            {
-                if (isTurn)
-                {
-                    //GameManager.Instance.PreviewScore(num);
-                    if(GameManager.Instance.state == State.PlayGame)
-                    GameManager.Instance.startBnt.gameObject.SetActive(true);
-                    foreach (var item in GameManager.Instance.spriteManager)
-                        item.button.enabled = true;
-                }
-                else
-                {
-                    GameManager.Instance.startBnt.gameObject.SetActive(false);
-                    foreach (var item in GameManager.Instance.spriteManager)
-                        item.button.enabled = false;
-                }
-            }
-        }
-    }
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         if (photonView.IsMine)

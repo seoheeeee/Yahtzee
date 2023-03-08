@@ -22,7 +22,6 @@ public class Dice : MonoBehaviourPun
     public bool isRoll;
     public bool isEnd;
     public bool isStop;
-    public bool enabelBtn;
     public int value;
     public int index;
 
@@ -89,6 +88,9 @@ public class Dice : MonoBehaviourPun
     }
     IEnumerator EndDiceRoll(int count)
     {
+        foreach (DiceSide item in diceSides)
+            item.isActive = false;
+
         for (int i = count; i > 0; i--)
         {
             while (true)
