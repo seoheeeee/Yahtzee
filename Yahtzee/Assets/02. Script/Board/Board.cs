@@ -1,41 +1,66 @@
-using System.Collections;
+using Photon.Pun;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Board : MonoBehaviour
+public class Board : MonoBehaviourPun
 {
     [SerializeField]
-    Sprite board;
+    Sprite[] sprBoard;
+
     [SerializeField]
     Sprite[] playerTurn;
 
-    public Dictionary<int, Dictionary<ScoreType, Score>> playerScore;
+    [SerializeField]
+    Image imgBoard;
 
     [SerializeField]
     List<Score> player1;
+
     [SerializeField]
     List<Score> player2;
 
-    private void Start()
+    Queue<Sprite> boardQueue;
+
+    public Dictionary<int, Dictionary<ScoreType, Score>> playerScore;
+    public TMP_Text[] txtPlayers;
+
+    private void Awake()
     {
-        //playerScore = new Dictionary<int, Dictionary<ScoreType, Score>>();
+        boardQueue = new Queue<Sprite>();
+        boardQueue.Enqueue(sprBoard[1]);
+        boardQueue.Enqueue(sprBoard[0]);
 
-        //Dictionary<ScoreType, Score> temp = new Dictionary<ScoreType, Score>();
-        //foreach (Score item in player1)
-        //    temp.Add(item.scoreType, item);
+        playerScore = new Dictionary<int, Dictionary<ScoreType, Score>>();
 
-        //playerScore.Add(1, temp);
+        Dictionary<ScoreType, Score> temp = new Dictionary<ScoreType, Score>();
+        foreach (Score item in player1)
+            temp.Add(item.scoreType, item);
 
-        //Dictionary<ScoreType, Score> temp2 = new Dictionary<ScoreType, Score>();
-        //foreach (Score item in player2)
-        //    temp2.Add(item.scoreType, item);
+        playerScore.Add(1, temp);
 
-        //playerScore.Add(2, temp2);
+        Dictionary<ScoreType, Score> temp2 = new Dictionary<ScoreType, Score>();
+        foreach (Score item in player2)
+            temp2.Add(item.scoreType, item);
+
+        playerScore.Add(2, temp2);
+
+
     }
 
-    //»ç¿ë¹ý
-    //playerScore[1][ScoreType.Aces]
+
+    public void ChangeBoard()=> photonView.RPC("RPCChangeBoard", RpcTarget.AllBuffered);
+    [PunRPC]
+    void RPCChangeBoard()
+    {
+        Sprite sprite = boardQueue.Dequeue();
+
+        imgBoard.sprite = sprite;
+
+        boardQueue.Enqueue(sprite);
+    }
+
 }
 
 

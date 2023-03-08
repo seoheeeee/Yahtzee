@@ -47,6 +47,27 @@ MonoBehaviour:
   - RPCSetScore
   - ChangePlayer
   - CurrentPlayer
+  - RPCRemoveSprite
+  - RPCSyncSprite
+  - RPCAtiveDice
+  - AddDice
+  - RemoveDice
+  - SelectDice
+  - RPCActiveDice
+  - RPCSelectDice
+  - EndDiceRoll
+  - OnClickButton
+  - ChangeBoard
+  - RPCChangeBoard
+  - RPCTurnProgress
+  - RPCChance
+  - RandDice
+  - RPCDiceEnd
+  - RPCDiceRoll
+  - ResetBoard
+  - Result
+  - StopDice
+  - ChangeState
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

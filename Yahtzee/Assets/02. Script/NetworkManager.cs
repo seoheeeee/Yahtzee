@@ -36,6 +36,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+
+        Screen.SetResolution(1920, 1080, false);
+
         SceneBtn.SetActive(false);
     }
 
@@ -163,7 +166,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            if(PhotonNetwork.PlayerList.Length == 2)
+            //if(PhotonNetwork.PlayerList.Length == 2)
             SceneManager.LoadScene(1);
         }
     }

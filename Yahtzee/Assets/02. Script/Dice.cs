@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using Photon.Pun;
+using UnityEditor;
 
-public class Dice : MonoBehaviour
+public class Dice : MonoBehaviourPun
 {
     [SerializeField]
     Transform dice;
@@ -19,12 +21,17 @@ public class Dice : MonoBehaviour
     
     public bool isRoll;
     public bool isEnd;
+    public bool isStop;
+    public bool enabelBtn;
     public int value;
+    public int index;
 
     [SerializeField]
     Material dotActice;
     [SerializeField]
     Material dotMaterial;
+
+
 
     private void Start()
     {
@@ -39,11 +46,11 @@ public class Dice : MonoBehaviour
         endRotation = Quaternion.Euler(randRotation[index]);
     }
 
-
     private void Update()
     {
         if (isRoll)
         {
+            
             foreach (DiceSide item in diceSides)
                 item.meshRenderer.material = dotMaterial;
 
@@ -68,7 +75,18 @@ public class Dice : MonoBehaviour
             }
         }
     }
+    public void GameReset(int playerIndedx)
+    {
+        dice.rotation = Quaternion.identity;
+        gameObject.SetActive(true);
 
+        photonView.TransferOwnership(PhotonNetwork.PlayerList[playerIndedx]);
+
+        foreach (DiceSide item in diceSides)
+        {
+             item.meshRenderer.material = dotMaterial;
+        }
+    }
     IEnumerator EndDiceRoll(int count)
     {
         for (int i = count; i > 0; i--)
@@ -101,17 +119,33 @@ public class Dice : MonoBehaviour
                 item.meshRenderer.material = dotActice;
             }
         }
+
+        isStop = true;
     }
+
+    //[PunRPC]
+    //void StopDice(bool isStop)
+    //{
+    //    this.isStop = isStop;
+    //}
 
     public void SelectDice2()
     {
-        if (value == 0)
+        if (value == 0 || !isStop)
             return;
-        GameManager.Instance.SelectDice(this);
-        gameObject.SetActive(false);
-
-        Debug.Log(123);
+        GameManager.Instance.SelectDice(index, value);
     }
+
+    //[PunRPC]
+    //void RPCAtiveDice(bool activate)
+    //{
+    //    gameObject.SetActive(activate);
+    //}
+
+    //public void ActiveDice(bool activate)
+    //{
+    //    photonView.RPC("RPCAtiveDice", RpcTarget.AllBuffered, activate);
+    //}
 
     #region Old Dice
     //[SerializeField] Rigidbody rb;
