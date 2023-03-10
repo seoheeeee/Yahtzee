@@ -47,11 +47,10 @@ public class Score : MonoBehaviourPun
             txtScore.text = "0 / 63";
 
         scoreBtn = transform.GetComponent<Button>();
-        scoreBtn.enabled = true;
+        scoreBtn.enabled = false;
 
         gray = new Color(30f / 255f, 30f / 255f, 30f / 255f, 0.5f);
         green = new Color(0, 128f / 255f, 0, 0.7f);
-        //black = Color.black;
     }
     private void Start()
     {
@@ -59,13 +58,6 @@ public class Score : MonoBehaviourPun
         scoreBtn.onClick.AddListener(GameManager.Instance.EndTurn);
         DeactiveBtn();
     }
-    private void Update()
-    {
-        if (scoreType == ScoreType.Bonus) scoreBtn.enabled = false;
-        if (scoreType == ScoreType.Subtotal) scoreBtn.enabled = false;
-        if (scoreType == ScoreType.Total) scoreBtn.enabled = false;
-    }
-
     [PunRPC]
     void RPCSetScore(int score)
     {
@@ -110,9 +102,11 @@ public class Score : MonoBehaviourPun
     {
         if (!onClick)
         {
+            if (scoreType == ScoreType.Subtotal) return;
+            if (scoreType == ScoreType.Bonus) return;
+            if (scoreType == ScoreType.Total) return;
             scoreBtn.enabled = true;
-            if (scoreType != ScoreType.Subtotal)
-                txtScore.color = green;
+            txtScore.color = green;
         }
     }
 
@@ -122,7 +116,7 @@ public class Score : MonoBehaviourPun
         if (scoreType != ScoreType.Subtotal && txtScore.text != "")
         {
             txtScore.color = Color.black;
-            SetScore(int.Parse(txtScore.text));
+            //SetScore(int.Parse(txtScore.text));
         }
     }
 }

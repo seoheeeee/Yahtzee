@@ -45,8 +45,6 @@ public class Board : MonoBehaviourPun
             temp2.Add(item.scoreType, item);
 
         playerScore.Add(2, temp2);
-
-
     }
 
 

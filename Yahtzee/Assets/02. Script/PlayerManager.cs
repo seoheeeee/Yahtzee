@@ -4,7 +4,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunInstantiateMagicCall
 {
     public int num;
     public bool isTurn;
-
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
