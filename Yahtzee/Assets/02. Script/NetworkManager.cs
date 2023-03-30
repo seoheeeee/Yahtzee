@@ -1,6 +1,8 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -36,12 +38,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-
         Screen.SetResolution(1920, 1080, false);
-
         SceneBtn.SetActive(false);
     }
-
     //방리스트 갱신
     public void MyListClick(int num)
     {
@@ -85,8 +84,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         MyListRenewal();
     }
 
-    void Awake() => Screen.SetResolution(2880, 1440, false);
-
     public void Connect() => PhotonNetwork.ConnectUsingSettings();
 
     public override void OnConnectedToMaster() => PhotonNetwork.JoinLobby();
@@ -124,8 +121,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         RoomRenewal();
         ChatInput.text = "";
         for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
-
-        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
     }
 
 
@@ -134,14 +129,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinRandomFailed(short returnCode, string message) { RoomInput.text = ""; CreateRoom(); }
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
-
         RoomRenewal();
         ChatRPC("<color=yellow>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         RoomRenewal();
         ChatRPC("<color=yellow>" + otherPlayer.NickName + "님이 퇴장하셨습니다</color>");

@@ -12,33 +12,51 @@ public enum State
     EndGame
 }
 
-
 public class GameManager : MonoBehaviourPun
 {
     public State state;
 
     static GameManager instance;
 
-    [SerializeField]
-    TMP_Text txtChance;
-
+    [Space(20)]
+    [Header("Button")]
+    [Space(10)]
     [SerializeField]
     Button stopBnt;
     [SerializeField]
+    Button startBnt;
+    [Space(20)]
+
+    [Header("Class")]
+    [Space(10)]
+    [SerializeField]
     Board board;
+    [SerializeField]
+    Player curPlayer;
+    [SerializeField]
+    Player restPlayer;
+    [Space(20)]
 
+    [Header("Text")]
+    [Space(10)]
     [SerializeField]
-    PlayerManager curPlayer;
+    TMP_Text txtSpecialResult;
     [SerializeField]
-    PlayerManager restPlayer;
+    TMP_Text txtTurn;
     [SerializeField]
-    TMP_Text txtResult;
+    TMP_Text txtChance;
+    [Space(20)]
 
-    public TMP_Text txtTurn;
-    public Button startBnt;
+    [Header("List")]
+    [Space(10)]
     public List<DiceSpritesManager> spriteManager;
     public List<Dice> diceList;
-    //public int selectDiceCount;
+    [SerializeField]
+    List<Player> playerList;
+    [Space(20)]
+
+    [Header("Type")]
+    [Space(10)]
     public int keepDiceCount;
     public int chance;
     int turn;
@@ -62,7 +80,7 @@ public class GameManager : MonoBehaviourPun
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -73,50 +91,48 @@ public class GameManager : MonoBehaviourPun
 
     void Start()
     {
-        photonView.RPC("RPCChance", RpcTarget.AllBuffered, chance);
+
+        for (int i = 0; i < PhotonNetwork.CurrentRoom.Players.Count; i++)
+        {
+                Player temp = playerList[i];
+                if (i == 0)
+                {
+                    temp.isTurn = true;
+                    temp.player = PhotonNetwork.CurrentRoom.Players[1];
+                    temp.SetPlayer(1, temp.player.NickName);
+                }
+                else
+                {
+                    temp.player = PhotonNetwork.CurrentRoom.Players[2];
+                    temp.photonView.TransferOwnership(temp.player);
+                    temp.SetPlayer(2, temp.player.NickName);
+                }
+
+            if (PhotonNetwork.CurrentRoom.Players[i+1].NickName != "")
+                board.txtPlayers[i].text = playerList[i].player.NickName;
+            else
+                board.txtPlayers[i].text = $"Player{i + 1}";
+        }
+        curPlayer = playerList[0];
+        restPlayer = playerList[1];
+
         turn = 1;
         txtTurn.text = "1 / 12";
         chance = 3;
 
-        PlayerManager[] tempPlayer = FindObjectsOfType<PlayerManager>();
-
-        foreach (PlayerManager item in tempPlayer)
-        {
-            if (item.num == 1)
-            {
-                curPlayer = item;
-                curPlayer.isTurn = true;
-                if (item.gameObject.name != "")
-                    board.txtPlayers[item.num - 1].text = item.gameObject.name;
-                else
-                    board.txtPlayers[item.num - 1].text = "Player1";
-            }
-            else
-            {
-                restPlayer = item;
-                if (item.gameObject.name != "")
-                    board.txtPlayers[item.num - 1].text = item.gameObject.name;
-                else
-                    board.txtPlayers[item.num - 1].text = "Player2";
-            }
-        }
         startBnt.gameObject.SetActive(false);
         stopBnt.gameObject.SetActive(false);
 
         diceDot = new Dictionary<int, int>();
 
         for (int i = 1; i <= 6; i++)
-        {
             diceDot.Add(i, 0);
-        }
 
-        photonView.RPC("RPCChance", RpcTarget.AllBuffered, chance);
-        txtResult.gameObject.SetActive(false);
+        txtSpecialResult.gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        //txtChance.text = chance.ToString();
         if (photonView.IsMine)
         {
             switch (state)
@@ -132,6 +148,8 @@ public class GameManager : MonoBehaviourPun
                         foreach (var item in spriteManager)
                             item.button.enabled = true;
                     }
+                    else
+                        startBnt.gameObject.SetActive(false);
                     break;
 
                 case State.DiceRoll:
@@ -164,15 +182,12 @@ public class GameManager : MonoBehaviourPun
         else
         {
             startBnt.gameObject.SetActive(false);
+            stopBnt.gameObject.SetActive(false);
+
             foreach (var item in spriteManager)
                 item.button.enabled = false;
         }
 
-    }
-    [PunRPC]
-    void ChangeState(int state)
-    {
-        this.state = (State)state;
     }
 
     public void StartRoll()
@@ -197,7 +212,6 @@ public class GameManager : MonoBehaviourPun
         photonView.RPC("ResetBoard", RpcTarget.AllBuffered);
         state = State.DiceRoll;
     }
-
 
     [PunRPC]
     void ResetBoard()
@@ -460,25 +474,25 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     void Result(string result)
     {
-        txtResult.text = result.Replace("_", ". ");
+        txtSpecialResult.text = result.Replace("_", ". ");
         StartCoroutine(IResult());
     }
     IEnumerator IResult()
     {
-        txtResult.gameObject.SetActive(true);
+        txtSpecialResult.gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
-        txtResult.gameObject.SetActive(false);
+        txtSpecialResult.gameObject.SetActive(false);
     }
     public void EndTurn()
     {
         chance = 0;
-        photonView.TransferOwnership(PhotonNetwork.PlayerList[restPlayer.num - 1]);
+        photonView.TransferOwnership(restPlayer.player);
 
         if (curPlayer.num == 2)
         {
             turn++;
-            
-            photonView.RPC("RPCTurnProgress", RpcTarget.AllBuffered, turn); 
+
+            photonView.RPC("RPCTurnProgress", RpcTarget.AllBuffered, turn);
         }
 
         int totalScore = 0;
@@ -510,7 +524,7 @@ public class GameManager : MonoBehaviourPun
 
         photonView.RPC("ResetBoard", RpcTarget.AllBuffered);
         photonView.RPC("ChangePlayer", RpcTarget.AllBuffered);
-        
+
         photonView.RPC("RPCChance", RpcTarget.AllBuffered, chance);
         board.ChangeBoard();
     }
@@ -519,7 +533,7 @@ public class GameManager : MonoBehaviourPun
     void ChangePlayer()
     {
 
-        PlayerManager temp = curPlayer;
+        Player temp = curPlayer;
         curPlayer = restPlayer;
         restPlayer = temp;
         chance = 3;
@@ -545,11 +559,12 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     void RPCTurnProgress(int turn)
     {
-        if(turn == 13)
+        if (turn == 13)
         {
             state = State.EndGame;
             return;
         }
         txtTurn.text = $"{turn} / 12";
     }
+
 }

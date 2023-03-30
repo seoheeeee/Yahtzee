@@ -68,6 +68,11 @@ MonoBehaviour:
   - Result
   - StopDice
   - ChangeState
+  - RPCSetPlayer
+  - RPCSetPlayerName
+  - RPCSetPlayerNum
+  - RPCResetGame
+  - NewGame
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
